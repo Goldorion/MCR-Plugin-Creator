@@ -23,7 +23,7 @@ Dev - [Goldorion](https://github.com/Goldorion)
 
 Thanks to all of you helping in reporting bugs, using or anything else.
 
-The software's MCreator forum page is [here](https://mcreator.net/forum/60201/fabric-generator-plugin).
+The software's MCreator forum page is [here](https://mcreator.net/forum/65454/mcr-plugin-creator).
 
 Licensed under the Apache 2.0 License
 - Plugins created with this tool may be closed source and/or be distributed with a different license.
