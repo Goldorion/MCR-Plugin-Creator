@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="gson-2.8.6">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../MCR Plugin Creator - Copie/out/artifacts/MCR_Plugin_Creator/libs/gson-2.8.6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/gson-2.8.6.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

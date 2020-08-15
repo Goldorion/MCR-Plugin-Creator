@@ -5,10 +5,12 @@
       <options>
         <option name="appClass" value="ca.goldorion.mcrpcreator.MainApp" />
         <option name="description" value="" />
+        <option name="height" value="750" />
         <option name="htmlPlaceholderId" value="" />
-        <option name="title" value="" />
-        <option name="vendor" value="" />
-        <option name="version" value="" />
+        <option name="title" value="MCRPluginCreator" />
+        <option name="vendor" value="Goldorion" />
+        <option name="version" value="0.1.1" />
+        <option name="width" value="1280" />
       </options>
     </properties>
     <root id="root">
