@@ -86,7 +86,7 @@ public class MainApp extends Application {
             // Load block overview.
             FXMLLoader loader = new FXMLLoader();
 
-            loader.setLocation(MainApp.class.getResource("/BlockOverview.fxml"));
+            loader.setLocation(MainApp.class.getResource("/ca/goldorion/mcrpcreator/ui/BlockOverview.fxml"));
             AnchorPane blockOverview = (AnchorPane) loader.load();
 
             // Set block overview into the center of root layout.

@@ -18,7 +18,8 @@
         <items>
             <TableView fx:id="blockTable" prefHeight="200.0" prefWidth="200.0">
               <columns>
-                <TableColumn fx:id="fileNameColumn" prefWidth="635.0" text="File Name" />
+                <TableColumn fx:id="fileNameColumn" prefWidth="306.0" text="File Name" />
+                  <TableColumn fx:id="typeColumn" prefWidth="404.0" text="Type" />
               </columns>
             </TableView>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="718.0" prefWidth="704.0">

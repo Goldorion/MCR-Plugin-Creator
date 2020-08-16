@@ -23,6 +23,8 @@ public class BlockOverviewController {
     private TableView<BlockModel> blockTable;
     @FXML
     private TableColumn<BlockModel, String> fileNameColumn;
+    @FXML
+    private TableColumn<BlockModel, String> typeColumn;
 
     @FXML
     private Label fileNameLabel;
@@ -47,6 +49,7 @@ public class BlockOverviewController {
     private void initialize(){
         // Initialize the person table with the two columns.
         fileNameColumn.setCellValueFactory(cellData -> cellData.getValue().fileNameProperty());
+        typeColumn.setCellValueFactory(cellData -> cellData.getValue().typeProperty());
 
         // Clear person details.
         showBLockDetails(null);
