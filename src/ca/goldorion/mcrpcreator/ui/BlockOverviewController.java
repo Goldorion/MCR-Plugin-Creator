@@ -52,11 +52,11 @@ public class BlockOverviewController {
         typeColumn.setCellValueFactory(cellData -> cellData.getValue().typeProperty());
 
         // Clear person details.
-        showBLockDetails(null);
+        showBlockDetails(null);
 
         // Listen for selection changes and show the person details when changed.
         blockTable.getSelectionModel().selectedItemProperty().addListener(
-                (observable, oldValue, newValue) -> showBLockDetails(newValue));
+                (observable, oldValue, newValue) -> showBlockDetails(newValue));
     }
 
     public void setMainApp(MainApp mainApp){
@@ -65,7 +65,7 @@ public class BlockOverviewController {
         blockTable.setItems(mainApp.getBlockData());
     }
 
-    private void showBLockDetails(BlockModel block) {
+    private void showBlockDetails(BlockModel block) {
         if(block != null){
             fileNameLabel.setText(block.getFileName());
             textLabel.setText(block.getText());
@@ -102,11 +102,7 @@ public class BlockOverviewController {
      */
     @FXML
     private void handleNewBlock(){
-        BlockModel tempBlock = new BlockModel("");
-        boolean okClicked = mainApp.showBlockOutputEditDialog(tempBlock);
-        if(okClicked){
-            mainApp.getBlockData().add(tempBlock);
-        }
+        mainApp.showBlockTypeSelector();
     }
 
     /**
@@ -119,7 +115,7 @@ public class BlockOverviewController {
         if(selectedBlock != null){
             boolean okClicked = mainApp.showBlockOutputEditDialog(selectedBlock);
             if(okClicked){
-                showBLockDetails(selectedBlock);
+                showBlockDetails(selectedBlock);
             }
 
         } else {

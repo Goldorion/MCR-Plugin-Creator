@@ -4,6 +4,7 @@ import ca.goldorion.mcrpcreator.io.BlockSerializationManager;
 import ca.goldorion.mcrpcreator.models.BlockModel;
 import ca.goldorion.mcrpcreator.ui.BlockOuputEditDialogController;
 import ca.goldorion.mcrpcreator.ui.BlockOverviewController;
+import ca.goldorion.mcrpcreator.ui.BlockTypeSelectorController;
 import ca.goldorion.mcrpcreator.ui.RootLayoutController;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -19,7 +20,7 @@ import java.io.IOException;
 
 public class MainApp extends Application {
     public static final String appName = "MCR Plugin Creator";
-    public static final String version = "0.1.0";
+    public static final String version = "0.2.0";
 
     private Stage primaryStage;
     private BorderPane rootLayout;
@@ -125,6 +126,36 @@ public class MainApp extends Application {
             return controller.isOkClicked();
 
         } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean showBlockTypeSelector() {
+        try {
+            // Load block overview.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("/ca/goldorion/mcrpcreator/ui/BlockTypeSelector.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            //Create the Dialog Stage
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Select Block Type");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            //Set the block into the controller
+            BlockTypeSelectorController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+            controller.setMainApp(this);
+
+            dialogStage.showAndWait();
+
+            return controller.isOkClicked();
+
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
