@@ -1,7 +1,7 @@
 package ca.goldorion.mcrpcreator;
 
 import ca.goldorion.mcrpcreator.io.BlockSerializationManager;
-import ca.goldorion.mcrpcreator.models.BlockModel;
+import ca.goldorion.mcrpcreator.models.BlockOutputModel;
 import ca.goldorion.mcrpcreator.ui.BlockOuputEditDialogController;
 import ca.goldorion.mcrpcreator.ui.BlockOverviewController;
 import ca.goldorion.mcrpcreator.ui.BlockTypeSelectorController;
@@ -24,24 +24,20 @@ public class MainApp extends Application {
 
     private Stage primaryStage;
     private BorderPane rootLayout;
-    private ObservableList<BlockModel> blockData = FXCollections.observableArrayList();
-
-    private BlockSerializationManager blockSerializationManager;
+    private ObservableList<BlockOutputModel> blockData = FXCollections.observableArrayList();
 
     public static void main(String[] args) {
         launch(args);
     }
 
     public MainApp(){
-
-        this.blockSerializationManager = new BlockSerializationManager();
         /**
          * To add new templates, write them here
          */
 
     }
 
-    public ObservableList<BlockModel> getBlockData(){
+    public ObservableList<BlockOutputModel> getBlockData(){
         return blockData;
     }
 
@@ -101,7 +97,7 @@ public class MainApp extends Application {
         }
     }
 
-    public boolean showBlockOutputEditDialog(BlockModel blockModel){
+    public boolean showBlockOutputEditDialog(BlockOutputModel blockModel){
         try{
             // Load the fxml file and create a new stage for the popup dialog.
             FXMLLoader loader = new FXMLLoader();
@@ -166,13 +162,5 @@ public class MainApp extends Application {
      */
     public Stage getPrimaryStage() {
         return primaryStage;
-    }
-
-    public BlockSerializationManager getBlockSerializationManager() {
-        return blockSerializationManager;
-    }
-
-    public void setBlockSerializationManager(BlockSerializationManager blockSerializationManager) {
-        this.blockSerializationManager = blockSerializationManager;
     }
 }

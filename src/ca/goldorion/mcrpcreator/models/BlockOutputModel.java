@@ -1,14 +1,11 @@
 package ca.goldorion.mcrpcreator.models;
 
-import ca.goldorion.mcrpcreator.io.jsons.BlockOutput;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-import java.io.File;
-
-public class BlockModel {
+public class BlockOutputModel {
 
     private final StringProperty fileName;
     private final StringProperty text;
@@ -16,9 +13,11 @@ public class BlockModel {
     private final StringProperty toolbox;
     private final IntegerProperty colour;
     private final StringProperty dependencies;
+    private final String blockType;
 
-    public BlockModel(String fileName) {
+    public BlockOutputModel(String fileName) {
         this.fileName = new SimpleStringProperty(fileName);
+        this.blockType = "Output";
 
         this.text = new SimpleStringProperty("");
         this.type = new SimpleStringProperty("");
@@ -97,5 +96,9 @@ public class BlockModel {
 
     public StringProperty dependenciesProperty() {
         return dependencies;
+    }
+
+    public String getBlockType() {
+        return blockType;
     }
 }

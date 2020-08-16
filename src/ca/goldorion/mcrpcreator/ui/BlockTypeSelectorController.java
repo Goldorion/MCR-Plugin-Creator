@@ -1,7 +1,7 @@
 package ca.goldorion.mcrpcreator.ui;
 
 import ca.goldorion.mcrpcreator.MainApp;
-import ca.goldorion.mcrpcreator.models.BlockModel;
+import ca.goldorion.mcrpcreator.models.BlockOutputModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -35,7 +35,7 @@ public class BlockTypeSelectorController {
         String selectedChoice = choiceBox.getSelectionModel().getSelectedItem();
 
         if(selectedChoice == "Output Procedure Block"){
-            BlockModel tempBlock = new BlockModel("");
+            BlockOutputModel tempBlock = new BlockOutputModel("");
             boolean okClicked = mainApp.showBlockOutputEditDialog(tempBlock);
             if(okClicked){
                 mainApp.getBlockData().add(tempBlock);

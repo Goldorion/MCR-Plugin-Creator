@@ -1,6 +1,6 @@
 package ca.goldorion.mcrpcreator.ui;
 
-import ca.goldorion.mcrpcreator.models.BlockModel;
+import ca.goldorion.mcrpcreator.models.BlockOutputModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -20,7 +20,7 @@ public class BlockOuputEditDialogController {
     private TextField dependenciesField;
 
     private Stage dialogStage;
-    private BlockModel blockModel;
+    private BlockOutputModel blockModel;
     private boolean okClicked = false;
 
     @FXML
@@ -31,7 +31,7 @@ public class BlockOuputEditDialogController {
         this.dialogStage = dialogStage;
     }
 
-    public void setBlockModel(BlockModel blockModel){
+    public void setBlockModel(BlockOutputModel blockModel){
         this.blockModel = blockModel;
 
         fileNameField.setText((blockModel.getFileName()));

@@ -5,7 +5,7 @@ import ca.goldorion.mcrpcreator.io.BlockSerializationManager;
 import ca.goldorion.mcrpcreator.io.jsons.BlockOutput;
 import ca.goldorion.mcrpcreator.io.jsons.Dependencies;
 import ca.goldorion.mcrpcreator.io.jsons.MCreator;
-import ca.goldorion.mcrpcreator.models.BlockModel;
+import ca.goldorion.mcrpcreator.models.BlockOutputModel;
 import ca.goldorion.mcrpcreator.utils.FileUtils;
 import com.google.gson.*;
 import javafx.fxml.FXML;
@@ -20,11 +20,11 @@ import java.io.File;
 public class BlockOverviewController {
 
     @FXML
-    private TableView<BlockModel> blockTable;
+    private TableView<BlockOutputModel> blockTable;
     @FXML
-    private TableColumn<BlockModel, String> fileNameColumn;
+    private TableColumn<BlockOutputModel, String> fileNameColumn;
     @FXML
-    private TableColumn<BlockModel, String> typeColumn;
+    private TableColumn<BlockOutputModel, String> typeColumn;
 
     @FXML
     private Label fileNameLabel;
@@ -65,11 +65,11 @@ public class BlockOverviewController {
         blockTable.setItems(mainApp.getBlockData());
     }
 
-    private void showBlockDetails(BlockModel block) {
+    private void showBlockDetails(BlockOutputModel block) {
         if(block != null){
             fileNameLabel.setText(block.getFileName());
             textLabel.setText(block.getText());
-            typeLabel.setText(block.getType());
+            typeLabel.setText(block.getBlockType() + " - "+ block.getType());
             colourLabel.setText(Integer.toString(block.getColour()));
             toolboxLabel.setText(block.getToolbox());
             dependenciesLabel.setText(block.getDependencies());
@@ -111,7 +111,7 @@ public class BlockOverviewController {
      */
     @FXML
     private void handleEditBlock(){
-        BlockModel selectedBlock = blockTable.getSelectionModel().getSelectedItem();
+        BlockOutputModel selectedBlock = blockTable.getSelectionModel().getSelectedItem();
         if(selectedBlock != null){
             boolean okClicked = mainApp.showBlockOutputEditDialog(selectedBlock);
             if(okClicked){
@@ -142,7 +142,7 @@ public class BlockOverviewController {
 
             //Dependencies object
             Dependencies dependencies = null;
-                BlockModel selectedBlock = blockTable.getSelectionModel().getSelectedItem();
+                BlockOutputModel selectedBlock = blockTable.getSelectionModel().getSelectedItem();
             if(dependenciesLabel.getText() == null || dependenciesLabel.getText().length() == 0) {
                  dependencies = new Dependencies(selectedBlock.getDependencies(), selectedBlock.getDependencies());
             }

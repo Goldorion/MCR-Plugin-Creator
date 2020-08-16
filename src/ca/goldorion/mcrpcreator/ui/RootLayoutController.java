@@ -2,11 +2,11 @@ package ca.goldorion.mcrpcreator.ui;
 
 import ca.goldorion.mcrpcreator.MainApp;
 import static ca.goldorion.mcrpcreator.MainApp.*;
-import ca.goldorion.mcrpcreator.io.BlockSerializationManager;
+
 import ca.goldorion.mcrpcreator.io.jsons.BlockOutput;
 import ca.goldorion.mcrpcreator.io.jsons.Dependencies;
 import ca.goldorion.mcrpcreator.io.jsons.MCreator;
-import ca.goldorion.mcrpcreator.models.BlockModel;
+import ca.goldorion.mcrpcreator.models.BlockOutputModel;
 import ca.goldorion.mcrpcreator.preferences.Preferences;
 import ca.goldorion.mcrpcreator.utils.FileUtils;
 import com.google.gson.Gson;
@@ -24,9 +24,9 @@ import java.io.FileReader;
 public class RootLayoutController {
 
     @FXML
-    private TableView<BlockModel> blockTable;
+    private TableView<BlockOutputModel> blockTable;
     @FXML
-    private TableColumn<BlockModel, String> fileNameColumn;
+    private TableColumn<BlockOutputModel, String> fileNameColumn;
 
     private MainApp mainApp;
     private Preferences preferences;
@@ -49,7 +49,7 @@ public class RootLayoutController {
             Gson gson = new Gson();
             try {
                 BlockOutput blockOutput = gson.fromJson(new BufferedReader(new FileReader(file)), BlockOutput.class);
-                BlockModel blockModel = new BlockModel(file.getName().replace(".json", ""));
+                BlockOutputModel blockModel = new BlockOutputModel(file.getName().replace(".json", ""));
                 blockModel.setFileName(file.getName().replace(".json", ""));
                 blockModel.setText(blockOutput.getMessage0());
                 blockModel.setType(blockOutput.getOutput());
@@ -87,7 +87,7 @@ public class RootLayoutController {
             if(!file.getPath().endsWith(".json")) {
                 file = new File(file.getPath() + ".json");
             }
-            BlockModel selectedBlock = blockTable.getSelectionModel().getSelectedItem();
+            BlockOutputModel selectedBlock = blockTable.getSelectionModel().getSelectedItem();
             //Dependencies object
             Dependencies dependencies = new Dependencies(selectedBlock.getDependencies(), selectedBlock.getDependencies());
 
