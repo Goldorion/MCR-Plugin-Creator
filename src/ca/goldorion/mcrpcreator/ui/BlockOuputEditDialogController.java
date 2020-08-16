@@ -2,6 +2,7 @@ package ca.goldorion.mcrpcreator.ui;
 
 import ca.goldorion.mcrpcreator.models.BlockOutputModel;
 import javafx.fxml.FXML;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -17,7 +18,21 @@ public class BlockOuputEditDialogController {
     @FXML
     private TextField toolboxField;
     @FXML
-    private TextField dependenciesField;
+    private CheckBox boolBox;
+    @FXML
+    private CheckBox directionBox;
+    @FXML
+    private CheckBox entityBox;
+    @FXML
+    private CheckBox integerBox;
+    @FXML
+    private CheckBox itemstackBox;
+    @FXML
+    private CheckBox mapBox;
+    @FXML
+    private CheckBox stringBox;
+    @FXML
+    private CheckBox worldBox;
 
     private Stage dialogStage;
     private BlockOutputModel blockModel;
@@ -31,7 +46,7 @@ public class BlockOuputEditDialogController {
         this.dialogStage = dialogStage;
     }
 
-    public void setBlockModel(BlockOutputModel blockModel){
+    public void setBlockOutputModel(BlockOutputModel blockModel){
         this.blockModel = blockModel;
 
         fileNameField.setText((blockModel.getFileName()));
@@ -39,7 +54,14 @@ public class BlockOuputEditDialogController {
         typeField.setText(blockModel.getType());
         colourField.setText(Integer.toString(blockModel.getColour()));
         toolboxField.setText(blockModel.getToolbox());
-        dependenciesField.setText(blockModel.getDependencies());
+        boolBox.setSelected(blockModel.isBool());
+        directionBox.setSelected(blockModel.isDirection());
+        entityBox.setSelected(blockModel.isEntity());
+        integerBox.setSelected(blockModel.isInteger());
+        itemstackBox.setSelected(blockModel.isItemstack());
+        mapBox.setSelected(blockModel.isMap());
+        stringBox.setSelected(blockModel.isString());
+        worldBox.setSelected(blockModel.isWorld());
     }
 
     public boolean isOkClicked() {
@@ -54,9 +76,14 @@ public class BlockOuputEditDialogController {
             blockModel.setType(typeField.getText());
             blockModel.setColour(Integer.parseInt(colourField.getText()));
             blockModel.setToolbox(toolboxField.getText());
-            if(dependenciesField.getText() == null || dependenciesField.getText().length() == 0) {
-                blockModel.setDependencies(dependenciesField.getText());
-            }
+            blockModel.setBool(boolBox.isSelected());
+            blockModel.setDirection(directionBox.isSelected());
+            blockModel.setEntity(entityBox.isSelected());
+            blockModel.setInteger(integerBox.isSelected());
+            blockModel.setItemstack(itemstackBox.isSelected());
+            blockModel.setMap(mapBox.isSelected());
+            blockModel.setString(stringBox.isSelected());
+            blockModel.setWorld(worldBox.isSelected());
 
             okClicked = true;
             dialogStage.close();
@@ -99,5 +126,4 @@ public class BlockOuputEditDialogController {
             return false;
         }
     }
-
 }

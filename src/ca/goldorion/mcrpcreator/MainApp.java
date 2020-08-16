@@ -1,6 +1,5 @@
 package ca.goldorion.mcrpcreator;
 
-import ca.goldorion.mcrpcreator.io.BlockSerializationManager;
 import ca.goldorion.mcrpcreator.models.BlockOutputModel;
 import ca.goldorion.mcrpcreator.ui.BlockOuputEditDialogController;
 import ca.goldorion.mcrpcreator.ui.BlockOverviewController;
@@ -34,6 +33,7 @@ public class MainApp extends Application {
         /**
          * To add new templates, write them here
          */
+        blockData.add(new BlockOutputModel("test"));
 
     }
 
@@ -58,7 +58,7 @@ public class MainApp extends Application {
         try {
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("/RootLayout.fxml"));
+            loader.setLocation(MainApp.class.getResource("/ca/goldorion/mcrpcreator/ui/RootLayout.fxml"));
             this.rootLayout = (BorderPane) loader.load();
 
             // Show the scene containing the root layout.
@@ -101,7 +101,7 @@ public class MainApp extends Application {
         try{
             // Load the fxml file and create a new stage for the popup dialog.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("/BlockOutputEditDialog.fxml"));
+            loader.setLocation(MainApp.class.getResource("/ca/goldorion/mcrpcreator/ui/BlockOutputEditDialog.fxml"));
             AnchorPane page = (AnchorPane) loader.load();
 
             //Create the Dialog Stage
@@ -115,7 +115,7 @@ public class MainApp extends Application {
             //Set the block into the controller
             BlockOuputEditDialogController controller = loader.getController();
             controller.setDialogStage(dialogStage);
-            controller.setBlockModel(blockModel);
+            controller.setBlockOutputModel(blockModel);
 
             dialogStage.showAndWait();
 

@@ -15,6 +15,8 @@ import javafx.scene.control.TableView;
 import javafx.stage.FileChooser;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class BlockOverviewController {
@@ -72,7 +74,38 @@ public class BlockOverviewController {
             typeLabel.setText(block.getBlockType() + " - "+ block.getType());
             colourLabel.setText(Integer.toString(block.getColour()));
             toolboxLabel.setText(block.getToolbox());
-            dependenciesLabel.setText(block.getDependencies());
+
+            //ArrayList to store all dependencies used in the JSON
+            String dependencies = null;
+            if(block.isBool() == true){
+                dependencies = "Boolean - ";
+            }
+            if(block.isDirection() == true){
+                dependencies = dependencies + "Direction - ";
+            }
+            if(block.isEntity() == true){
+                dependencies = dependencies + "Entity -\n";
+            }
+            if(block.isInteger() == true){
+                dependencies = dependencies + "Int - ";
+            }
+            if(block.isItemstack() == true){
+                dependencies = dependencies + "Itemstack - ";
+            }
+            if(block.isMap() == true){
+                dependencies = dependencies + "Map - \n";
+            }
+            if(block.isString() == true){
+                dependencies = dependencies + "String - ";
+            }
+            if(block.isWorld() == true){
+                dependencies = dependencies + "World";
+            }
+            if(dependencies == null){
+                dependencies = "None";
+            }
+
+            dependenciesLabel.setText(dependencies);
         } else {
             fileNameLabel.setText("None");
             textLabel.setText("None");
@@ -141,24 +174,58 @@ public class BlockOverviewController {
             }
 
             //Dependencies object
-            Dependencies dependencies = null;
-                BlockOutputModel selectedBlock = blockTable.getSelectionModel().getSelectedItem();
-            if(dependenciesLabel.getText() == null || dependenciesLabel.getText().length() == 0) {
-                 dependencies = new Dependencies(selectedBlock.getDependencies(), selectedBlock.getDependencies());
+            BlockOutputModel selectedBlock = blockTable.getSelectionModel().getSelectedItem();
+            //ArrayList to store all dependencies used in the JSON
+            ArrayList dependencies = new ArrayList();
+            if(selectedBlock.isBool() == true){
+                Dependencies depenBool = new Dependencies("boolean", "boolean");
+                dependencies.add(depenBool);
+            }
+            if(selectedBlock.isDirection() == true){
+                Dependencies depenDirec = new Dependencies("direction", "direction");
+                dependencies.add(depenDirec);
+            }
+            if(selectedBlock.isEntity() == true){
+                Dependencies depenEntity = new Dependencies("entity", "entity");
+                dependencies.add(depenEntity);
+            }
+            if(selectedBlock.isInteger() == true){
+                Dependencies depenX = new Dependencies("int", "x");
+                dependencies.add(depenX);
+                Dependencies depenY = new Dependencies("int", "y");
+                dependencies.add(depenY);
+                Dependencies depenZ = new Dependencies("int", "z");
+                dependencies.add(depenZ);
+            }
+            if(selectedBlock.isItemstack() == true){
+                Dependencies depenItemstack = new Dependencies("itemstack", "itemstack");
+                dependencies.add(depenItemstack);;
+            }
+            if(selectedBlock.isMap() == true){
+                Dependencies depenMap = new Dependencies("map", "cmdparams");
+                dependencies.add(depenMap);
+            }
+            if(selectedBlock.isString() == true){
+                Dependencies depenString = new Dependencies("string", "string");
+                dependencies.add(depenString);
+            }
+            if(selectedBlock.isWorld() == true){
+                Dependencies depenWorld = new Dependencies("world", "world");
+                dependencies.add(depenWorld);
             }
 
-                //MCreator object with the dependencies object
-                MCreator mcreator = new MCreator(selectedBlock.getToolbox(), new Dependencies[]{dependencies});
+            //MCreator object with the dependencies object
+            MCreator mcreator = new MCreator(selectedBlock.getToolbox(), new ArrayList<Dependencies>(dependencies));
 
-                //BlockOutput object with the mcreator object
-                BlockOutput blockOutput = new BlockOutput(selectedBlock.getText(), selectedBlock.getType(), selectedBlock.getColour(), mcreator);
+            //BlockOutput object with the mcreator object
+            BlockOutput blockOutput = new BlockOutput(selectedBlock.getText(), selectedBlock.getType(), selectedBlock.getColour(), mcreator);
 
-                System.out.println(selectedBlock.getDependencies());
-                //Create a Gson Builder and add the JSON in a String to create a file with the String
-                Gson gson = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
-                String json = gson.toJson(blockOutput);
-                FileUtils.saveFile(file, json);
-                System.out.println(json);
+            System.out.println(dependencies);
+            //Create a Gson Builder and add the JSON in a String to create a file with the String
+            Gson gson = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
+            String json = gson.toJson(blockOutput);
+            FileUtils.saveFile(file, json);
+            System.out.println(json);
 
         }
     }

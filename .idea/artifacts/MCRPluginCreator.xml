@@ -1,12 +1,13 @@
 <component name="ArtifactManager">
-  <artifact type="javafx" name="MCR Plugin Creator">
-    <output-path>$PROJECT_DIR$/out/artifacts/MCR_Plugin_Creator</output-path>
+  <artifact type="javafx" name="MCRPluginCreator">
+    <output-path>$PROJECT_DIR$/out/artifacts/MCRPluginCreator</output-path>
     <properties id="javafx-properties">
       <options>
         <option name="appClass" value="ca.goldorion.mcrpcreator.MainApp" />
         <option name="description" value="" />
         <option name="height" value="750" />
         <option name="htmlPlaceholderId" value="" />
+        <option name="nativeBundle" value="dmg" />
         <option name="title" value="MCRPluginCreator" />
         <option name="vendor" value="Goldorion" />
         <option name="version" value="0.2.0" />

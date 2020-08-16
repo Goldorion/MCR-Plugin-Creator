@@ -1,18 +1,22 @@
 package ca.goldorion.mcrpcreator.models;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 
 public class BlockOutputModel {
 
-    private final StringProperty fileName;
-    private final StringProperty text;
-    private final StringProperty type;
-    private final StringProperty toolbox;
-    private final IntegerProperty colour;
-    private final StringProperty dependencies;
+    private StringProperty fileName;
+    private StringProperty text;
+    private StringProperty type;
+    private StringProperty toolbox;
+    private IntegerProperty colour;
+    private BooleanProperty bool;
+    private BooleanProperty direction;
+    private BooleanProperty entity;
+    private BooleanProperty integer;
+    private BooleanProperty itemstack;
+    private BooleanProperty map;
+    private BooleanProperty string;
+    private BooleanProperty world;
     private final String blockType;
 
     public BlockOutputModel(String fileName) {
@@ -23,7 +27,15 @@ public class BlockOutputModel {
         this.type = new SimpleStringProperty("");
         this.toolbox = new SimpleStringProperty("");
         this.colour = new SimpleIntegerProperty();
-        this.dependencies = new SimpleStringProperty("");
+        this.bool = new SimpleBooleanProperty(false);
+        this.direction = new SimpleBooleanProperty(false);
+        this.entity = new SimpleBooleanProperty(false);
+        this.integer = new SimpleBooleanProperty(false);
+        this.itemstack = new SimpleBooleanProperty(false);
+        this.map = new SimpleBooleanProperty(false);
+        this.string = new SimpleBooleanProperty(false);
+        this.world = new SimpleBooleanProperty(false);
+
     }
 
     public String getFileName() {
@@ -86,16 +98,100 @@ public class BlockOutputModel {
         return colour;
     }
 
-    public String getDependencies() {
-        return dependencies.get();
+    public boolean isBool() {
+        return bool.get();
     }
 
-    public void setDependencies(String dependencies) {
-        this.dependencies.set(dependencies);
+    public BooleanProperty getBoolProperty() {
+        return bool;
     }
 
-    public StringProperty dependenciesProperty() {
-        return dependencies;
+    public void setBool(boolean bool) {
+        this.bool.set(bool);
+    }
+
+    public boolean isDirection() {
+        return direction.get();
+    }
+
+    public BooleanProperty getDirectionProperty() {
+        return direction;
+    }
+
+    public void setDirection(boolean direction) {
+        this.direction.set(direction);
+    }
+
+    public boolean isEntity() {
+        return entity.get();
+    }
+
+    public BooleanProperty getEntityProperty() {
+        return entity;
+    }
+
+    public void setEntity(boolean entity) {
+        this.entity.set(entity);
+    }
+
+    public boolean isInteger() {
+        return integer.get();
+    }
+
+    public BooleanProperty getIntegerProperty() {
+        return integer;
+    }
+
+    public void setInteger(boolean integer) {
+        this.integer.set(integer);
+    }
+
+    public boolean isItemstack() {
+        return itemstack.get();
+    }
+
+    public BooleanProperty getItemstackProperty() {
+        return itemstack;
+    }
+
+    public void setItemstack(boolean itemstack) {
+        this.itemstack.set(itemstack);
+    }
+
+    public boolean isMap() {
+        return map.get();
+    }
+
+    public BooleanProperty getMapProperty() {
+        return map;
+    }
+
+    public void setMap(boolean map) {
+        this.map.set(map);
+    }
+
+    public boolean isString() {
+        return string.get();
+    }
+
+    public BooleanProperty getStringProperty() {
+        return string;
+    }
+
+    public void setString(boolean string) {
+        this.string.set(string);
+    }
+
+    public boolean isWorld() {
+        return world.get();
+    }
+
+    public BooleanProperty getWorldProperty() {
+        return world;
+    }
+
+    public void setWorld(boolean world) {
+        this.world.set(world);
     }
 
     public String getBlockType() {

@@ -20,6 +20,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.ArrayList;
 
 public class RootLayoutController {
 
@@ -55,16 +56,20 @@ public class RootLayoutController {
                 blockModel.setType(blockOutput.getOutput());
                 blockModel.setColour(blockOutput.getColour());
                 blockModel.setToolbox(blockOutput.getMcreator().getToolbox_id());
-                Dependencies dependencies = blockOutput.getMcreator().getDependencies()[0];
-                blockModel.setDependencies(dependencies.getType());
+                blockModel.setBool(blockOutput.getMcreator().getDependencies().contains("boolean"));
+                blockModel.setDirection(blockOutput.getMcreator().getDependencies().contains("direction"));
+                blockModel.setEntity(blockOutput.getMcreator().getDependencies().contains("entity"));
+                blockModel.setInteger(blockOutput.getMcreator().getDependencies().contains("int"));
+                blockModel.setItemstack(blockOutput.getMcreator().getDependencies().contains("itemstack"));
+                blockModel.setMap(blockOutput.getMcreator().getDependencies().contains("map"));
+                blockModel.setString(blockOutput.getMcreator().getDependencies().contains("string"));
+                blockModel.setWorld(blockOutput.getMcreator().getDependencies().contains("world"));
                 mainApp.getBlockData().add(blockModel);
 
             } catch (FileNotFoundException e) {
                 AlertWindows.error("File Not Found", "Please select a file");
                 e.printStackTrace();
             }
-        } else {
-            AlertWindows.error("File Not Found", "Please select a file");
         }
 
     }
@@ -87,17 +92,55 @@ public class RootLayoutController {
             if(!file.getPath().endsWith(".json")) {
                 file = new File(file.getPath() + ".json");
             }
-            BlockOutputModel selectedBlock = blockTable.getSelectionModel().getSelectedItem();
+
             //Dependencies object
-            Dependencies dependencies = new Dependencies(selectedBlock.getDependencies(), selectedBlock.getDependencies());
+            BlockOutputModel selectedBlock = blockTable.getSelectionModel().getSelectedItem();
+            //ArrayList to store all dependencies used in the JSON
+            ArrayList dependencies = new ArrayList();
+            if(selectedBlock.isBool() == true){
+                Dependencies depenBool = new Dependencies("boolean", "boolean");
+                dependencies.add(depenBool);
+            }
+            if(selectedBlock.isDirection() == true){
+                Dependencies depenDirec = new Dependencies("direction", "direction");
+                dependencies.add(depenDirec);
+            }
+            if(selectedBlock.isEntity() == true){
+                Dependencies depenEntity = new Dependencies("entity", "entity");
+                dependencies.add(depenEntity);
+            }
+            if(selectedBlock.isInteger() == true){
+                Dependencies depenX = new Dependencies("int", "x");
+                dependencies.add(depenX);
+                Dependencies depenY = new Dependencies("int", "y");
+                dependencies.add(depenY);
+                Dependencies depenZ = new Dependencies("int", "z");
+                dependencies.add(depenZ);
+            }
+            if(selectedBlock.isItemstack() == true){
+                Dependencies depenItemstack = new Dependencies("itemstack", "itemstack");
+                dependencies.add(depenItemstack);;
+            }
+            if(selectedBlock.isMap() == true){
+                Dependencies depenMap = new Dependencies("map", "cmdparams");
+                dependencies.add(depenMap);
+            }
+            if(selectedBlock.isString() == true){
+                Dependencies depenString = new Dependencies("string", "string");
+                dependencies.add(depenString);
+            }
+            if(selectedBlock.isWorld() == true){
+                Dependencies depenWorld = new Dependencies("world", "world");
+                dependencies.add(depenWorld);
+            }
 
             //MCreator object with the dependencies object
-            MCreator mcreator = new MCreator(selectedBlock.getToolbox(), new Dependencies[]{dependencies});
+            MCreator mcreator = new MCreator(selectedBlock.getToolbox(), new ArrayList<Dependencies>(dependencies));
 
             //BlockOutput object with the mcreator object
             BlockOutput blockOutput = new BlockOutput(selectedBlock.getText(), selectedBlock.getType(), selectedBlock.getColour(), mcreator);
 
-            System.out.println(selectedBlock.getDependencies());
+            System.out.println(dependencies);
             //Create a Gson Builder and add the JSON in a String to create a file with the String
             Gson gson = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().serializeNulls().create();
             String json = gson.toJson(blockOutput);
