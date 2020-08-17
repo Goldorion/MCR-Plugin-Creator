@@ -69,7 +69,7 @@ public class Export {
             }
 
             //MCreator object with the dependencies object
-            MCreator mcreator = new MCreator(selectedBlock.getToolbox(),new ArrayList<Dependencies>(dependencies));
+            MCreator mcreator = new MCreator(selectedBlock.getToolbox(),new ArrayList<String>(selectedBlock.getFields()), new ArrayList<Dependencies>(dependencies));
 
             //BlockOutput object with the mcreator object
             BlockOutput blockOutput = new BlockOutput(selectedBlock.getText(), selectedBlock.getExtensions(), selectedBlock.getType(), selectedBlock.getColour(), mcreator);

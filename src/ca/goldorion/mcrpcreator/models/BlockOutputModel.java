@@ -8,10 +8,11 @@ public class BlockOutputModel {
 
     private StringProperty fileName;
     private StringProperty text;
-    private ArrayList extensions;
+    private ArrayList<String> extensions;
     private StringProperty type;
     private StringProperty toolbox;
     private IntegerProperty colour;
+    private ArrayList<String> fields;
     private BooleanProperty bool;
     private BooleanProperty direction;
     private BooleanProperty entity;
@@ -31,6 +32,7 @@ public class BlockOutputModel {
         this.type = new SimpleStringProperty("");
         this.toolbox = new SimpleStringProperty("");
         this.colour = new SimpleIntegerProperty();
+        this.fields = new ArrayList<>();
         this.bool = new SimpleBooleanProperty(false);
         this.direction = new SimpleBooleanProperty(false);
         this.entity = new SimpleBooleanProperty(false);
@@ -209,5 +211,13 @@ public class BlockOutputModel {
     public ArrayList setExtensions(ArrayList extensions) {
         this.extensions = extensions;
         return extensions;
+    }
+
+    public ArrayList<String> getFields() {
+        return fields;
+    }
+
+    public void setFields(ArrayList<String> fields) {
+        this.fields = fields;
     }
 }

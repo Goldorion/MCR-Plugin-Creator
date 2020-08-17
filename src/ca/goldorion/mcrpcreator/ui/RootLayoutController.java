@@ -1,18 +1,17 @@
 package ca.goldorion.mcrpcreator.ui;
 
 import ca.goldorion.mcrpcreator.MainApp;
-import static ca.goldorion.mcrpcreator.MainApp.*;
-import ca.goldorion.mcrpcreator.io.jsons.Import;
+import ca.goldorion.mcrpcreator.io.input.Import;
 import ca.goldorion.mcrpcreator.models.BlockOutputModel;
-import ca.goldorion.mcrpcreator.preferences.Preferences;
 import ca.goldorion.mcrpcreator.utils.AlertUtils;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.FileChooser;
 
 import java.io.File;
+
+import static ca.goldorion.mcrpcreator.MainApp.version;
 
 public class RootLayoutController {
 
@@ -22,7 +21,6 @@ public class RootLayoutController {
     private TableColumn<BlockOutputModel, String> fileNameColumn;
 
     private MainApp mainApp;
-    private Preferences preferences;
 
     @FXML
     private void handleOpen(){

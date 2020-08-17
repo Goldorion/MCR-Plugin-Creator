@@ -12,12 +12,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.logging.Handler;
-import java.util.logging.Level;
-import java.util.logging.LogRecord;
-import java.util.logging.Logger;
 
 public class MainApp extends Application {
     public static final String appName = "MCR Plugin Creator";
@@ -25,15 +20,15 @@ public class MainApp extends Application {
 
     private Stage primaryStage;
     private BorderPane rootLayout;
-    private ObservableList<BlockOutputModel> blockData = FXCollections.observableArrayList();
+    private final ObservableList<BlockOutputModel> blockData = FXCollections.observableArrayList();
 
     public static void main(String[] args) {
         launch(args);
     }
 
     public MainApp(){
-        /**
-         * To add new templates, write them here
+        /*
+          To add new templates, write them here
          */
         blockData.add(new BlockOutputModel("test"));
 
@@ -61,7 +56,7 @@ public class MainApp extends Application {
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("/ca/goldorion/mcrpcreator/ui/RootLayout.fxml"));
-            this.rootLayout = (BorderPane) loader.load();
+            this.rootLayout = loader.load();
 
             // Show the scene containing the root layout.
             Scene scene = new Scene(rootLayout);
@@ -86,7 +81,7 @@ public class MainApp extends Application {
             FXMLLoader loader = new FXMLLoader();
 
             loader.setLocation(MainApp.class.getResource("/ca/goldorion/mcrpcreator/ui/BlockOverview.fxml"));
-            AnchorPane blockOverview = (AnchorPane) loader.load();
+            AnchorPane blockOverview = loader.load();
 
             // Set block overview into the center of root layout.
             rootLayout.setCenter(blockOverview);
@@ -104,7 +99,7 @@ public class MainApp extends Application {
             // Load the fxml file and create a new stage for the popup dialog.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("/ca/goldorion/mcrpcreator/ui/BlockOutputEditDialog.fxml"));
-            AnchorPane page = (AnchorPane) loader.load();
+            AnchorPane page = loader.load();
 
             //Create the Dialog Stage
             Stage dialogStage = new Stage();
@@ -130,12 +125,12 @@ public class MainApp extends Application {
         }
     }
 
-    public boolean showBlockTypeSelector() {
+    public void showBlockTypeSelector() {
         try {
             // Load the block selector menu window
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("/ca/goldorion/mcrpcreator/ui/BlockTypeSelector.fxml"));
-            AnchorPane page = (AnchorPane) loader.load();
+            AnchorPane page = loader.load();
 
             //Create the Dialog Stage
             Stage dialogStage = new Stage();
@@ -152,20 +147,17 @@ public class MainApp extends Application {
 
             dialogStage.showAndWait();
 
-            return controller.isOkClicked();
-
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
         }
     }
 
-    public boolean showExtensionsEdit(){
+    public void showExtensionsEdit(BlockOutputModel blockOutputModel){
         try {
             // Load the extension edit window
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("/ca/goldorion/mcrpcreator/ui/ExtensionsEdit.fxml"));
-            AnchorPane page = (AnchorPane) loader.load();
+            AnchorPane page = loader.load();
 
             //Create the Dialog Stage
             Stage dialogStage = new Stage();
@@ -177,14 +169,12 @@ public class MainApp extends Application {
 
             ExtensionsEditController controller = loader.getController();
             controller.setExtensionStage(dialogStage);
+            controller.setBlockOutputModel(blockOutputModel);
             controller.setMainApp(this);
 
             dialogStage.showAndWait();
-
-            return controller.isOkClicked();
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
         }
     }
 

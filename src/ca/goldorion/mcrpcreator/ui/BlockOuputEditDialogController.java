@@ -38,7 +38,7 @@ public class BlockOuputEditDialogController {
 
     private MainApp mainApp;
     private Stage dialogStage;
-    private BlockOutputModel blockModel;
+    public BlockOutputModel blockModel;
     private boolean okClicked = false;
 
     @FXML
@@ -101,7 +101,7 @@ public class BlockOuputEditDialogController {
 
     @FXML
     private void handleEditExtensions(){
-        mainApp.showExtensionsEdit();
+        mainApp.showExtensionsEdit(blockModel);
     }
 
     private boolean isInputValid() {

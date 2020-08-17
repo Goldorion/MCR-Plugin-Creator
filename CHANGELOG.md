@@ -5,6 +5,7 @@
 * Added a selection menu to choose the block type to create
 * Added support to use all dependencies
 * Added an error message during the importation of a block if the file is an unsupported block.
+* Added the possibility add extension
 
 ## 0.1.1
 * [Bugfix] MacOS users couldn't open the JAR file (I was just stupid).
