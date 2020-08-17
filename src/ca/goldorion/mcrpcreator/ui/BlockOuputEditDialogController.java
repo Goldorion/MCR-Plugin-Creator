@@ -3,8 +3,11 @@ package ca.goldorion.mcrpcreator.ui;
 import ca.goldorion.mcrpcreator.MainApp;
 import ca.goldorion.mcrpcreator.models.BlockOutputModel;
 import ca.goldorion.mcrpcreator.utils.AlertUtils;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -14,7 +17,10 @@ public class BlockOuputEditDialogController {
     @FXML
     private TextField textField;
     @FXML
-    private TextField typeField;
+    ChoiceBox<String> typeChoiceBox;
+
+    ObservableList<String> availableTypes = FXCollections.observableArrayList("Direction", "Logic", "MCItem", "MCItemBlock", "Number", "String");
+
     @FXML
     private TextField colourField;
     @FXML
@@ -43,6 +49,9 @@ public class BlockOuputEditDialogController {
 
     @FXML
     private void initialize(){
+        typeChoiceBox.setItems(availableTypes);
+        typeChoiceBox.getSelectionModel().selectFirst();
+
     }
 
     public void setDialogStage(Stage dialogStage){
@@ -54,7 +63,7 @@ public class BlockOuputEditDialogController {
 
         fileNameField.setText((blockModel.getFileName()));
         textField.setText((blockModel.getText()));
-        typeField.setText(blockModel.getType());
+        typeChoiceBox.getSelectionModel().select(blockModel.getType());
         colourField.setText(Integer.toString(blockModel.getColour()));
         toolboxField.setText(blockModel.getToolbox());
         boolBox.setSelected(blockModel.isBool());
@@ -73,10 +82,11 @@ public class BlockOuputEditDialogController {
 
     @FXML
     private void handleOk(){
+        String selectedChoice = typeChoiceBox.getSelectionModel().getSelectedItem();
         if(isInputValid()){
             blockModel.setFileName(fileNameField.getText());
             blockModel.setText(textField.getText());
-            blockModel.setType(typeField.getText());
+            blockModel.setType(selectedChoice);
             blockModel.setColour(Integer.parseInt(colourField.getText()));
             blockModel.setToolbox(toolboxField.getText());
             blockModel.setBool(boolBox.isSelected());
@@ -111,9 +121,6 @@ public class BlockOuputEditDialogController {
         }
         if(textField.getText() == null || textField.getText().length() == 0){
             message += "Text is not valid!\n";
-        }
-        if(typeField.getText() == null || typeField.getText().length() == 0){
-            message += "Type is not valid!\n";
         }
         if(colourField.getText() == null || colourField.getText().length() == 0){
             message += "Colour is not valid!\n";
