@@ -1,10 +1,10 @@
-package ca.goldorion.mcrpcreator.ui;
+package ca.goldorion.mcrpcreator.utils;
 
 import ca.goldorion.mcrpcreator.MainApp;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
-public class AlertWindows {
+public class AlertUtils {
 
     public static void warning(MainApp mainApp, String title, String headerText, String contentText) {
         Alert alert = new Alert(Alert.AlertType.WARNING);

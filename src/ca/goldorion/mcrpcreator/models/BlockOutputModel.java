@@ -2,10 +2,13 @@ package ca.goldorion.mcrpcreator.models;
 
 import javafx.beans.property.*;
 
+import java.util.ArrayList;
+
 public class BlockOutputModel {
 
     private StringProperty fileName;
     private StringProperty text;
+    private ArrayList extensions;
     private StringProperty type;
     private StringProperty toolbox;
     private IntegerProperty colour;
@@ -24,6 +27,7 @@ public class BlockOutputModel {
         this.blockType = "Output";
 
         this.text = new SimpleStringProperty("");
+        this.extensions = new ArrayList();
         this.type = new SimpleStringProperty("");
         this.toolbox = new SimpleStringProperty("");
         this.colour = new SimpleIntegerProperty();
@@ -196,5 +200,14 @@ public class BlockOutputModel {
 
     public String getBlockType() {
         return blockType;
+    }
+
+    public ArrayList getExtensions() {
+        return extensions;
+    }
+
+    public ArrayList setExtensions(ArrayList extensions) {
+        this.extensions = extensions;
+        return extensions;
     }
 }

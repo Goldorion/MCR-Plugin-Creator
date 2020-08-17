@@ -1,6 +1,8 @@
 package ca.goldorion.mcrpcreator.ui;
 
+import ca.goldorion.mcrpcreator.MainApp;
 import ca.goldorion.mcrpcreator.models.BlockOutputModel;
+import ca.goldorion.mcrpcreator.utils.AlertUtils;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
@@ -34,6 +36,7 @@ public class BlockOuputEditDialogController {
     @FXML
     private CheckBox worldBox;
 
+    private MainApp mainApp;
     private Stage dialogStage;
     private BlockOutputModel blockModel;
     private boolean okClicked = false;
@@ -95,6 +98,12 @@ public class BlockOuputEditDialogController {
         dialogStage.close();
     }
 
+
+    @FXML
+    private void handleEditExtensions(){
+        mainApp.showExtensionsEdit();
+    }
+
     private boolean isInputValid() {
         String message = "";
         if(fileNameField.getText() == null || fileNameField.getText().length() == 0){
@@ -122,8 +131,12 @@ public class BlockOuputEditDialogController {
         if(message.length() == 0){
             return true;
         } else{
-            AlertWindows.error(dialogStage, "Invalid Field(s)", "Please correct invalid field(s)", message);
+            AlertUtils.error(dialogStage, "Invalid Field(s)", "Please correct invalid field(s)", message);
             return false;
         }
+    }
+
+    public void setMainApp(MainApp mainApp) {
+        this.mainApp = mainApp;
     }
 }

@@ -1,10 +1,7 @@
 package ca.goldorion.mcrpcreator;
 
 import ca.goldorion.mcrpcreator.models.BlockOutputModel;
-import ca.goldorion.mcrpcreator.ui.BlockOuputEditDialogController;
-import ca.goldorion.mcrpcreator.ui.BlockOverviewController;
-import ca.goldorion.mcrpcreator.ui.BlockTypeSelectorController;
-import ca.goldorion.mcrpcreator.ui.RootLayoutController;
+import ca.goldorion.mcrpcreator.ui.*;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,7 +12,12 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.logging.Handler;
+import java.util.logging.Level;
+import java.util.logging.LogRecord;
+import java.util.logging.Logger;
 
 public class MainApp extends Application {
     public static final String appName = "MCR Plugin Creator";
@@ -116,6 +118,7 @@ public class MainApp extends Application {
             BlockOuputEditDialogController controller = loader.getController();
             controller.setDialogStage(dialogStage);
             controller.setBlockOutputModel(blockModel);
+            controller.setMainApp(this);
 
             dialogStage.showAndWait();
 
@@ -129,7 +132,7 @@ public class MainApp extends Application {
 
     public boolean showBlockTypeSelector() {
         try {
-            // Load block overview.
+            // Load the block selector menu window
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("/ca/goldorion/mcrpcreator/ui/BlockTypeSelector.fxml"));
             AnchorPane page = (AnchorPane) loader.load();
@@ -156,6 +159,35 @@ public class MainApp extends Application {
             return false;
         }
     }
+
+    public boolean showExtensionsEdit(){
+        try {
+            // Load the extension edit window
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("/ca/goldorion/mcrpcreator/ui/ExtensionsEdit.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            //Create the Dialog Stage
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Edit Extensions");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            ExtensionsEditController controller = loader.getController();
+            controller.setExtensionStage(dialogStage);
+            controller.setMainApp(this);
+
+            dialogStage.showAndWait();
+
+            return controller.isOkClicked();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 
     /**
      * Returns the main stage.

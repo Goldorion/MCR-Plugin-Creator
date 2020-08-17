@@ -1,8 +1,6 @@
 package ca.goldorion.mcrpcreator.utils;
 
 
-import ca.goldorion.mcrpcreator.ui.AlertWindows;
-
 import java.io.*;
 
 public class FileUtils {
@@ -26,7 +24,7 @@ public class FileUtils {
 
         } catch(IOException e) {
             e.printStackTrace();
-            AlertWindows.error("Could not save data", "Could not save data to file:\n" + file.getPath());
+            AlertUtils.error("Could not save data", "Could not save data to file:\n" + file.getPath());
 
         }
     }
@@ -49,7 +47,7 @@ public class FileUtils {
 
             } catch(IOException e){
                 e.printStackTrace();
-                AlertWindows.error("Could not load data", "Could not load data from file:\\n" + file.getPath());
+                AlertUtils.error("Could not load data", "Could not load data from file:\\n" + file.getPath());
             }
         }
 
