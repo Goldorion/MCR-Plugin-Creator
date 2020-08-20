@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class BlockOutput {
     private String message0;
+    private ArrayList<Arguments> args;
     private String output;
     private int colour;
     private ArrayList extensions;
@@ -13,44 +14,28 @@ public class BlockOutput {
         return message0;
     }
 
-    public void setMessage0(String message0) {
-        this.message0 = message0;
-    }
+    public ArrayList getArgs() { return args; }
 
     public ArrayList getExtensions() {
         return extensions;
-    }
-
-    public void setExtensions(ArrayList extensions) {
-        this.extensions = extensions;
     }
 
     public String getOutput() {
         return output;
     }
 
-    public void setOutput(String output) {
-        this.output = output;
-    }
-
     public int getColour() {
         return colour;
-    }
-
-    public void setColour(int colour) {
-        this.colour = colour;
     }
 
     public MCreator getMcreator() {
         return mcreator;
     }
 
-    public void setMcreator(MCreator mcreator) {
-        this.mcreator = mcreator;
-    }
 
-    public BlockOutput(String message0,ArrayList extensions, String output, int colour, MCreator mcreator) {
+    public BlockOutput(String message0, ArrayList<Arguments> args, ArrayList extensions, String output, int colour, MCreator mcreator) {
         this.message0 = message0;
+        this.args = args;
         this.extensions = extensions;
         this.output = output;
         this.colour = colour;

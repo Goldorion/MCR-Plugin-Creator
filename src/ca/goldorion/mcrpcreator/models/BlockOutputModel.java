@@ -8,11 +8,15 @@ public class BlockOutputModel {
 
     private StringProperty fileName;
     private StringProperty text;
+    private ArrayList<InputValueModel> inputValueArgs;
     private ArrayList<String> extensions;
     private StringProperty type;
     private StringProperty toolbox;
     private IntegerProperty colour;
     private ArrayList<String> fields;
+    private ArrayList<String> inputs;
+
+    //Dependencies
     private BooleanProperty bool;
     private BooleanProperty direction;
     private BooleanProperty entity;
@@ -21,18 +25,20 @@ public class BlockOutputModel {
     private BooleanProperty map;
     private BooleanProperty string;
     private BooleanProperty world;
+
     private final String blockType;
 
     public BlockOutputModel(String fileName) {
         this.fileName = new SimpleStringProperty(fileName);
         this.blockType = "Output";
-
         this.text = new SimpleStringProperty("");
+        this.inputValueArgs = new ArrayList<>();
         this.extensions = new ArrayList();
         this.type = new SimpleStringProperty("");
         this.toolbox = new SimpleStringProperty("");
         this.colour = new SimpleIntegerProperty();
         this.fields = new ArrayList<>();
+        this.inputs = new ArrayList<>();
         this.bool = new SimpleBooleanProperty(false);
         this.direction = new SimpleBooleanProperty(false);
         this.entity = new SimpleBooleanProperty(false);
@@ -64,10 +70,6 @@ public class BlockOutputModel {
         this.text.set(text);
     }
 
-    public StringProperty textProperty() {
-        return text;
-    }
-
     public String getType() {
         return type.get();
     }
@@ -88,10 +90,6 @@ public class BlockOutputModel {
         this.toolbox.set(toolbox);
     }
 
-    public StringProperty toolboxProperty() {
-        return toolbox;
-    }
-
     public int getColour() {
         return colour.get();
     }
@@ -99,17 +97,8 @@ public class BlockOutputModel {
     public void setColour(int colour) {
         this.colour.set(colour);
     }
-
-    public IntegerProperty colourProperty() {
-        return colour;
-    }
-
     public boolean isBool() {
         return bool.get();
-    }
-
-    public BooleanProperty getBoolProperty() {
-        return bool;
     }
 
     public void setBool(boolean bool) {
@@ -120,20 +109,12 @@ public class BlockOutputModel {
         return direction.get();
     }
 
-    public BooleanProperty getDirectionProperty() {
-        return direction;
-    }
-
     public void setDirection(boolean direction) {
         this.direction.set(direction);
     }
 
     public boolean isEntity() {
         return entity.get();
-    }
-
-    public BooleanProperty getEntityProperty() {
-        return entity;
     }
 
     public void setEntity(boolean entity) {
@@ -144,20 +125,12 @@ public class BlockOutputModel {
         return integer.get();
     }
 
-    public BooleanProperty getIntegerProperty() {
-        return integer;
-    }
-
     public void setInteger(boolean integer) {
         this.integer.set(integer);
     }
 
     public boolean isItemstack() {
         return itemstack.get();
-    }
-
-    public BooleanProperty getItemstackProperty() {
-        return itemstack;
     }
 
     public void setItemstack(boolean itemstack) {
@@ -168,10 +141,6 @@ public class BlockOutputModel {
         return map.get();
     }
 
-    public BooleanProperty getMapProperty() {
-        return map;
-    }
-
     public void setMap(boolean map) {
         this.map.set(map);
     }
@@ -180,20 +149,12 @@ public class BlockOutputModel {
         return string.get();
     }
 
-    public BooleanProperty getStringProperty() {
-        return string;
-    }
-
     public void setString(boolean string) {
         this.string.set(string);
     }
 
     public boolean isWorld() {
         return world.get();
-    }
-
-    public BooleanProperty getWorldProperty() {
-        return world;
     }
 
     public void setWorld(boolean world) {
@@ -218,6 +179,23 @@ public class BlockOutputModel {
     }
 
     public void setFields(ArrayList<String> fields) {
+
         this.fields = fields;
+    }
+
+    public ArrayList<String> getInputs() {
+        return inputs;
+    }
+
+    public void setInputs(ArrayList<String> inputs) {
+        this.inputs = inputs;
+    }
+
+    public ArrayList<InputValueModel> getInputValueArgs() {
+        return inputValueArgs;
+    }
+
+    public void setInputValueArgs(ArrayList<InputValueModel> inputValueArgs) {
+        this.inputValueArgs = inputValueArgs;
     }
 }

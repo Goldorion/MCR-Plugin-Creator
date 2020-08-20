@@ -1,6 +1,7 @@
 package ca.goldorion.mcrpcreator.io;
 
 import ca.goldorion.mcrpcreator.MainApp;
+import ca.goldorion.mcrpcreator.io.jsons.Arguments;
 import ca.goldorion.mcrpcreator.io.jsons.BlockOutput;
 import ca.goldorion.mcrpcreator.io.jsons.Dependencies;
 import ca.goldorion.mcrpcreator.io.jsons.MCreator;
@@ -69,10 +70,32 @@ public class Export {
             }
 
             //MCreator object with the dependencies object
-            MCreator mcreator = new MCreator(selectedBlock.getToolbox(),new ArrayList<String>(selectedBlock.getFields()), new ArrayList<Dependencies>(dependencies));
+            MCreator mcreator = new MCreator(
+                    selectedBlock.getToolbox(),
+                    new ArrayList<String>(selectedBlock.getFields()),
+                    /*new ArrayList<>(selectedBlock.getInputs()),*/
+                    new ArrayList<Dependencies>(dependencies));
+
+            //Arguments
+            ArrayList<Arguments> args = new ArrayList<>();
+            if(selectedBlock.getInputs().size() > 0) {
+                for (int i = 0; i <= selectedBlock.getInputs().size(); ++i) {
+                    Arguments inputArg = new Arguments(
+                            "input_value",
+                            selectedBlock.getInputValueArgs().get(i).getArgName(),
+                            selectedBlock.getInputValueArgs().get(i).getArgCheck());
+                    args.add(inputArg);
+                }
+            }
 
             //BlockOutput object with the mcreator object
-            BlockOutput blockOutput = new BlockOutput(selectedBlock.getText(), selectedBlock.getExtensions(), selectedBlock.getType(), selectedBlock.getColour(), mcreator);
+            BlockOutput blockOutput = new BlockOutput(
+                    selectedBlock.getText(),
+                    args,
+                    selectedBlock.getExtensions(),
+                    selectedBlock.getType(),
+                    selectedBlock.getColour(),
+                    mcreator);
 
             //Create a Gson Builder and add the JSON in a String to create a file with the String
             Gson gson = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();

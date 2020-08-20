@@ -11,35 +11,36 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="555.0" prefWidth="617.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.goldorion.mcrpcreator.ui.BlockOuputEditDialogController">
+<AnchorPane prefHeight="598.0" prefWidth="619.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.goldorion.mcrpcreator.ui.blocks.BlockOuputEditDialogController">
    <children>
-      <GridPane layoutX="14.0" layoutY="14.0" prefHeight="502.0" prefWidth="593.0">
+      <GridPane layoutX="11.0" layoutY="14.0" prefHeight="529.0" prefWidth="596.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="506.0" minWidth="10.0" prefWidth="155.0" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="577.0" minWidth="10.0" prefWidth="450.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints maxHeight="63.0" minHeight="10.0" prefHeight="47.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="87.0" minHeight="0.0" prefHeight="80.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="152.0" minHeight="10.0" prefHeight="49.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="146.0" minHeight="10.0" prefHeight="68.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="107.0" minHeight="0.0" prefHeight="69.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="110.0" minHeight="10.0" prefHeight="69.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="164.0" minHeight="10.0" prefHeight="164.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="87.0" minHeight="0.0" prefHeight="59.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="87.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="152.0" minHeight="10.0" prefHeight="68.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="146.0" minHeight="10.0" prefHeight="63.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="107.0" minHeight="0.0" prefHeight="52.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="110.0" minHeight="10.0" prefHeight="57.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="164.0" minHeight="10.0" prefHeight="129.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <Label prefHeight="107.0" prefWidth="166.0" text="File Name" />
             <TextField fx:id="fileNameField" GridPane.columnIndex="1" />
             <Label prefHeight="341.0" prefWidth="518.0" text="Message" GridPane.rowIndex="1" />
             <TextField fx:id="textField" prefHeight="45.0" prefWidth="339.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label prefHeight="298.0" prefWidth="551.0" text="Type" GridPane.rowIndex="3" />
-            <ChoiceBox fx:id="typeChoiceBox" prefHeight="44.0" prefWidth="214.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Label prefHeight="114.0" prefWidth="245.0" text="Colour" GridPane.rowIndex="4" />
-            <TextField fx:id="colourField" prefHeight="26.0" prefWidth="302.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <Label prefHeight="234.0" prefWidth="493.0" text="Toolbox ID" GridPane.rowIndex="5" />
-            <TextField fx:id="toolboxField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <Label prefHeight="105.0" prefWidth="164.0" text="Dependencies" GridPane.rowIndex="6" />
-            <GridPane prefHeight="85.0" prefWidth="362.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
+            <Label prefHeight="298.0" prefWidth="551.0" text="Type" GridPane.rowIndex="4" />
+            <ChoiceBox fx:id="typeChoiceBox" prefHeight="44.0" prefWidth="214.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label prefHeight="114.0" prefWidth="245.0" text="Colour" GridPane.rowIndex="5" />
+            <TextField fx:id="colourField" prefHeight="26.0" prefWidth="302.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Label prefHeight="234.0" prefWidth="493.0" text="Toolbox ID" GridPane.rowIndex="6" />
+            <TextField fx:id="toolboxField" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <Label prefHeight="105.0" prefWidth="164.0" text="Dependencies" GridPane.rowIndex="7" />
+            <GridPane prefHeight="85.0" prefWidth="362.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -61,11 +62,25 @@
                   <CheckBox fx:id="worldBox" mnemonicParsing="false" text="world" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                </children>
             </GridPane>
-            <Label prefHeight="140.0" prefWidth="195.0" text="Extensions" GridPane.rowIndex="2" />
-            <Button mnemonicParsing="false" onAction="#handleEditExtensions" prefHeight="44.0" prefWidth="149.0" text="Edit Extensions" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label prefHeight="140.0" prefWidth="195.0" text="Extensions" GridPane.rowIndex="3" />
+            <Button mnemonicParsing="false" onAction="#handleEditExtensions" prefHeight="44.0" prefWidth="149.0" text="Edit Extensions" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label prefHeight="122.0" prefWidth="213.0" text="Arguments" GridPane.rowIndex="2" />
+            <GridPane GridPane.columnIndex="1" GridPane.rowIndex="2">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="151.0" text="See Input Value List" />
+                  <Label prefHeight="127.0" prefWidth="339.0" text="Not implemented yet" GridPane.columnIndex="1" />
+               </children>
+            </GridPane>
          </children>
       </GridPane>
-      <ButtonBar layoutX="221.0" layoutY="516.0" prefHeight="45.0" prefWidth="178.0">
+      <ButtonBar layoutX="221.0" layoutY="539.0" prefHeight="45.0" prefWidth="178.0">
         <buttons>
             <Button mnemonicParsing="false" onAction="#handleOk" text="OK" />
           <Button mnemonicParsing="false" onAction="#handleCancel" text="Cancel" />

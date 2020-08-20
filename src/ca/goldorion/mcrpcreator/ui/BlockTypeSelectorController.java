@@ -18,11 +18,9 @@ public class BlockTypeSelectorController {
     private MainApp mainApp;
 
     private Stage dialogStage;
-    private boolean okClicked = false;
 
     public BlockTypeSelectorController() {
     }
-
 
     @FXML
     private void initialize(){
@@ -56,9 +54,5 @@ public class BlockTypeSelectorController {
 
     public void setDialogStage(Stage dialogStage) {
         this.dialogStage = dialogStage;
-    }
-
-    public boolean isOkClicked() {
-        return okClicked;
     }
 }

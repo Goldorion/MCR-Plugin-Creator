@@ -1,4 +1,4 @@
-package ca.goldorion.mcrpcreator.ui;
+package ca.goldorion.mcrpcreator.ui.blocks.others;
 
 import ca.goldorion.mcrpcreator.MainApp;
 import ca.goldorion.mcrpcreator.models.BlockOutputModel;

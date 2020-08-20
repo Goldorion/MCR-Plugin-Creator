@@ -68,32 +68,32 @@ public class BlockOverviewController {
             toolboxLabel.setText(block.getToolbox());
 
             //ArrayList to store all dependencies used in the JSON
-            String dependencies = null;
-            if(block.isBool() == true){
+            String dependencies = "";
+            if(block.isBool()){
                 dependencies = "Boolean - ";
             }
-            if(block.isDirection() == true){
+            if(block.isDirection()){
                 dependencies = dependencies + "Direction - ";
             }
-            if(block.isEntity() == true){
+            if(block.isEntity()){
                 dependencies = dependencies + "Entity -\n";
             }
-            if(block.isInteger() == true){
+            if(block.isInteger()){
                 dependencies = dependencies + "Int - ";
             }
-            if(block.isItemstack() == true){
+            if(block.isItemstack()){
                 dependencies = dependencies + "Itemstack - ";
             }
-            if(block.isMap() == true){
+            if(block.isMap()){
                 dependencies = dependencies + "Map - \n";
             }
-            if(block.isString() == true){
+            if(block.isString()){
                 dependencies = dependencies + "String - ";
             }
-            if(block.isWorld() == true){
+            if(block.isWorld()){
                 dependencies = dependencies + "World";
             }
-            if(dependencies == null){
+            if(dependencies.equals("")){
                 dependencies = "None";
             }
 
@@ -109,9 +109,6 @@ public class BlockOverviewController {
         }
     }
 
-    /**
-     * Called when the user clicks on the delete button.
-     */
     @FXML
     private void handleDeleteBlock(){
         int selectedIndex = blockTable.getSelectionModel().getSelectedIndex();
@@ -122,19 +119,11 @@ public class BlockOverviewController {
         }
     }
 
-    /**
-     * Called when the user clicks the new button. Opens a dialog to edit
-     * details for a new block.
-     */
     @FXML
     private void handleNewBlock(){
         mainApp.showBlockTypeSelector();
     }
 
-    /**
-     * Called when the user clicks the edit button. Opens a dialog to edit
-     * details for the selected block.
-     */
     @FXML
     private void handleEditBlock(){
         BlockOutputModel selectedBlock = blockTable.getSelectionModel().getSelectedItem();
