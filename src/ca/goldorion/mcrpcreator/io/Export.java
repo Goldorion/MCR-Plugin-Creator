@@ -66,56 +66,66 @@ public class Export {
             }
 
             //MCreator object with the dependencies object
+            ArrayList fields = !selectedBlock.getFields().isEmpty() ? selectedBlock.getFields() : null;
+            ArrayList inputs = !selectedBlock.getInputs().isEmpty() ? selectedBlock.getInputs() : null;
+            ArrayList dependenciesFinal = !dependencies.isEmpty() ? dependencies : null;
             MCreator mcreator = new MCreator(
                     selectedBlock.getToolbox(),
-                    new ArrayList<>(selectedBlock.getFields()),
-                    new ArrayList<>(selectedBlock.getInputs()),
-                    new ArrayList<>(dependencies));
+                    fields,
+                    inputs,
+                    dependenciesFinal);
 
+            //BlockOutput object with the mcreator object
             //Arguments
             ArrayList<Object> args = new ArrayList<>();
             int i = 0;
-                while (selectedBlock.getArgName().size() > i ) {
-                    switch (selectedBlock.getArgType().get(i)) {
-                        case "input_value":
-                            String check = null;
-                            if(!selectedBlock.getArgSpecial().get(i).equals("All")){
-                                check = selectedBlock.getArgSpecial().get(i);
-                            }
-                            InputValue inputValue = new InputValue(
-                                    selectedBlock.getArgType().get(i),
-                                    selectedBlock.getArgName().get(i),
-                                    check
-                            );
-                            System.out.println(selectedBlock.getArgType().get(i));
-                            System.out.println(selectedBlock.getArgName().get(i));
-                            System.out.println(selectedBlock.getArgSpecial().get(i));
-                            args.add(inputValue);
-                            break;
-                        case "field_input":
-                            FieldInput fieldInput = new FieldInput(
-                                    selectedBlock.getArgType().get(i),
-                                    selectedBlock.getArgName().get(i)
-                            );
-                            args.add(fieldInput);
-                            break;
-                        case "field_checkbox":
-                            boolean checked = selectedBlock.getArgSpecial().get(i).equals("true");
-                            FieldCheckbox fieldCheckbox = new FieldCheckbox(
-                                    selectedBlock.getArgType().get(i),
-                                    selectedBlock.getArgName().get(i),
-                                    checked
-                            );
-                            args.add(fieldCheckbox);
-                            break;
-                    }
-                    i++;
+            while (selectedBlock.getArgName().size() > i ) {
+                switch (selectedBlock.getArgType().get(i)) {
+                    case "input_value":
+                        String check = null;
+                        if(!selectedBlock.getArgSpecial().get(i).equals("All")){
+                            check = selectedBlock.getArgSpecial().get(i);
+                        }
+                        InputValue inputValue = new InputValue(
+                                selectedBlock.getArgType().get(i),
+                                selectedBlock.getArgName().get(i),
+                                check
+                        );
+                        args.add(inputValue);
+                        break;
+                    case "field_input":
+                        FieldInput fieldInput = new FieldInput(
+                                selectedBlock.getArgType().get(i),
+                                selectedBlock.getArgName().get(i)
+                        );
+                        args.add(fieldInput);
+                        break;
+                    case "field_checkbox":
+                        boolean checked = selectedBlock.getArgSpecial().get(i).equals("true");
+                        FieldCheckbox fieldCheckbox = new FieldCheckbox(
+                                selectedBlock.getArgType().get(i),
+                                selectedBlock.getArgName().get(i),
+                                checked
+                        );
+                        args.add(fieldCheckbox);
+                        break;
                 }
-            //BlockOutput object with the mcreator object
+                i++;
+            }
+            if(args.isEmpty()){
+                args = null;
+            }
+            //Extensions
+            ArrayList extensions;
+            if(!selectedBlock.getExtensions().isEmpty()){
+                extensions = selectedBlock.getExtensions();
+            } else {
+                extensions = null;
+            }
             BlockOutput blockOutput = new BlockOutput(
                     selectedBlock.getText(),
                     args,
-                    selectedBlock.getExtensions(),
+                    extensions,
                     selectedBlock.getType(),
                     selectedBlock.getColour(),
                     mcreator);

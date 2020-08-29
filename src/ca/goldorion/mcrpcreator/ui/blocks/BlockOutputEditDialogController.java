@@ -152,6 +152,9 @@ public class BlockOutputEditDialogController {
             blockModel.setFileName(fileNameField.getText());
             blockModel.setText(textField.getText());
             blockModel.setType(typeChoiceBox.getSelectionModel().getSelectedItem());
+            if(blockModel.getType().equals("")){
+                blockModel.setType("Boolean");
+            }
             blockModel.setColour(Integer.parseInt(colourField.getText()));
             blockModel.setToolbox(toolboxField.getText());
             blockModel.setBool(boolBox.isSelected());
