@@ -1,15 +1,11 @@
 package ca.goldorion.mcrpcreator.io;
 
 import ca.goldorion.mcrpcreator.MainApp;
-import ca.goldorion.mcrpcreator.io.jsons.Arguments;
-import ca.goldorion.mcrpcreator.io.jsons.BlockOutput;
-import ca.goldorion.mcrpcreator.io.jsons.Dependencies;
-import ca.goldorion.mcrpcreator.io.jsons.MCreator;
+import ca.goldorion.mcrpcreator.io.jsons.*;
 import ca.goldorion.mcrpcreator.models.BlockOutputModel;
 import ca.goldorion.mcrpcreator.utils.FileUtils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import javafx.scene.control.TableView;
 import javafx.stage.FileChooser;
 
 import java.io.File;
@@ -17,7 +13,7 @@ import java.util.ArrayList;
 
 public class Export {
 
-    public static void OutputProcedureBlock(MainApp mainApp, TableView<BlockOutputModel> blockTable, BlockOutputModel selectedBlock){
+    public static void OutputProcedureBlock(MainApp mainApp, BlockOutputModel selectedBlock){
         FileChooser fileChooser = new FileChooser();
         FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter(
                 "JSON files", "*.json");
@@ -31,20 +27,20 @@ public class Export {
             //Dependencies object
 
             //ArrayList to store all dependencies used in the JSON
-            ArrayList dependencies = new ArrayList();
-            if(selectedBlock.isBool() == true){
+            ArrayList<Dependencies> dependencies = new ArrayList<>();
+            if(selectedBlock.isBool()){
                 Dependencies depenBool = new Dependencies("boolean", "boolean");
                 dependencies.add(depenBool);
             }
-            if(selectedBlock.isDirection() == true){
+            if(selectedBlock.isDirection()){
                 Dependencies depenDirec = new Dependencies("direction", "direction");
                 dependencies.add(depenDirec);
             }
-            if(selectedBlock.isEntity() == true){
+            if(selectedBlock.isEntity()){
                 Dependencies depenEntity = new Dependencies("entity", "entity");
                 dependencies.add(depenEntity);
             }
-            if(selectedBlock.isInteger() == true){
+            if(selectedBlock.isInteger()){
                 Dependencies depenX = new Dependencies("int", "x");
                 dependencies.add(depenX);
                 Dependencies depenY = new Dependencies("int", "y");
@@ -52,19 +48,19 @@ public class Export {
                 Dependencies depenZ = new Dependencies("int", "z");
                 dependencies.add(depenZ);
             }
-            if(selectedBlock.isItemstack() == true){
+            if(selectedBlock.isItemstack()){
                 Dependencies depenItemstack = new Dependencies("itemstack", "itemstack");
-                dependencies.add(depenItemstack);;
+                dependencies.add(depenItemstack);
             }
-            if(selectedBlock.isMap() == true){
+            if(selectedBlock.isMap()){
                 Dependencies depenMap = new Dependencies("map", "cmdparams");
                 dependencies.add(depenMap);
             }
-            if(selectedBlock.isString() == true){
+            if(selectedBlock.isString()){
                 Dependencies depenString = new Dependencies("string", "string");
                 dependencies.add(depenString);
             }
-            if(selectedBlock.isWorld() == true){
+            if(selectedBlock.isWorld()){
                 Dependencies depenWorld = new Dependencies("world", "world");
                 dependencies.add(depenWorld);
             }
@@ -72,22 +68,49 @@ public class Export {
             //MCreator object with the dependencies object
             MCreator mcreator = new MCreator(
                     selectedBlock.getToolbox(),
-                    new ArrayList<String>(selectedBlock.getFields()),
-                    /*new ArrayList<>(selectedBlock.getInputs()),*/
-                    new ArrayList<Dependencies>(dependencies));
+                    new ArrayList<>(selectedBlock.getFields()),
+                    new ArrayList<>(selectedBlock.getInputs()),
+                    new ArrayList<>(dependencies));
 
             //Arguments
-            ArrayList<Arguments> args = new ArrayList<>();
-            if(selectedBlock.getInputs().size() > 0) {
-                for (int i = 0; i <= selectedBlock.getInputs().size(); ++i) {
-                    Arguments inputArg = new Arguments(
-                            "input_value",
-                            selectedBlock.getInputValueArgs().get(i).getArgName(),
-                            selectedBlock.getInputValueArgs().get(i).getArgCheck());
-                    args.add(inputArg);
+            ArrayList<Object> args = new ArrayList<>();
+            int i = 0;
+                while (selectedBlock.getArgName().size() > i ) {
+                    switch (selectedBlock.getArgType().get(i)) {
+                        case "input_value":
+                            String check = null;
+                            if(!selectedBlock.getArgSpecial().get(i).equals("All")){
+                                check = selectedBlock.getArgSpecial().get(i);
+                            }
+                            InputValue inputValue = new InputValue(
+                                    selectedBlock.getArgType().get(i),
+                                    selectedBlock.getArgName().get(i),
+                                    check
+                            );
+                            System.out.println(selectedBlock.getArgType().get(i));
+                            System.out.println(selectedBlock.getArgName().get(i));
+                            System.out.println(selectedBlock.getArgSpecial().get(i));
+                            args.add(inputValue);
+                            break;
+                        case "field_input":
+                            FieldInput fieldInput = new FieldInput(
+                                    selectedBlock.getArgType().get(i),
+                                    selectedBlock.getArgName().get(i)
+                            );
+                            args.add(fieldInput);
+                            break;
+                        case "field_checkbox":
+                            boolean checked = selectedBlock.getArgSpecial().get(i).equals("true");
+                            FieldCheckbox fieldCheckbox = new FieldCheckbox(
+                                    selectedBlock.getArgType().get(i),
+                                    selectedBlock.getArgName().get(i),
+                                    checked
+                            );
+                            args.add(fieldCheckbox);
+                            break;
+                    }
+                    i++;
                 }
-            }
-
             //BlockOutput object with the mcreator object
             BlockOutput blockOutput = new BlockOutput(
                     selectedBlock.getText(),

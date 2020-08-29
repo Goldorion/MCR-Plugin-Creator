@@ -2,19 +2,17 @@ package ca.goldorion.mcrpcreator.ui.blocks;
 
 import ca.goldorion.mcrpcreator.MainApp;
 import ca.goldorion.mcrpcreator.models.BlockOutputModel;
-import ca.goldorion.mcrpcreator.models.InputValueModel;
 import ca.goldorion.mcrpcreator.utils.AlertUtils;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import java.util.ArrayList;
-
-public class BlockOuputEditDialogController {
+public class BlockOutputEditDialogController {
 
     private MainApp mainApp;
     private Stage dialogStage;
@@ -26,9 +24,24 @@ public class BlockOuputEditDialogController {
     @FXML
     private TextField textField;
 
+    //Arguments
+    @FXML
+    ListView argList;
+    @FXML
+    private ChoiceBox<String> argTypeChoiceBox;
+    private final ObservableList<String> availableArgTypes = FXCollections.observableArrayList("input_value", "field_input", "field_checkbox");
+    @FXML
+    private TextField argNameField;
+    @FXML
+    private ChoiceBox<String> checkArgChoiceBox;
+    private final ObservableList<String> availableArgChecks = FXCollections.observableArrayList("All", "Boolean", "Direction", "MCItem", "MCItemBlock", "Number", "String");
+    @FXML
+    private CheckBox argChecked;
+
+
     @FXML
     ChoiceBox<String> typeChoiceBox;
-    ObservableList<String> availableTypes = FXCollections.observableArrayList("Direction", "Logic", "MCItem", "MCItemBlock", "Number", "String");
+    ObservableList<String> availableTypes = FXCollections.observableArrayList("Boolean", "Direction", "MCItem", "MCItemBlock", "Number", "String");
 
     @FXML
     private TextField colourField;
@@ -51,12 +64,16 @@ public class BlockOuputEditDialogController {
     @FXML
     private CheckBox worldBox;
 
-    public ArrayList<InputValueModel> inputs = new ArrayList<>();
-
     @FXML
     private void initialize(){
         typeChoiceBox.setItems(availableTypes);
         typeChoiceBox.getSelectionModel().selectFirst();
+
+        argTypeChoiceBox.setItems(availableArgTypes);
+        argTypeChoiceBox.getSelectionModel().selectFirst();
+
+        checkArgChoiceBox.setItems(availableArgChecks);
+        checkArgChoiceBox.getSelectionModel().selectFirst();
 
     }
 
@@ -67,9 +84,10 @@ public class BlockOuputEditDialogController {
     public void setBlockOutputModel(BlockOutputModel blockModel){
         this.blockModel = blockModel;
 
-        fileNameField.setText((blockModel.getFileName()));
-        textField.setText((blockModel.getText()));
-        blockModel.setInputValueArgs(inputs);
+        fileNameField.setText(blockModel.getFileName());
+        textField.setText(blockModel.getText());
+        //List list = FXCollections.observableList(blockModel.getArgName());
+        //argList.setItems((ObservableList) list);
         typeChoiceBox.getSelectionModel().select(blockModel.getType());
         colourField.setText(Integer.toString(blockModel.getColour()));
         toolboxField.setText(blockModel.getToolbox());
@@ -87,10 +105,41 @@ public class BlockOuputEditDialogController {
         return okClicked;
     }
 
+
     @FXML
-    private void handleEditInputValuesArgs(){
-        mainApp.showInputValueArgumentList(blockModel);
+    private void handleNewArg(){
+        if(!argNameField.getText().isEmpty()) {
+            blockModel.getArgType().add(argTypeChoiceBox.getValue());
+            blockModel.getArgName().add(argNameField.getText());
+            switch (argTypeChoiceBox.getValue()) {
+                case "input_value":
+                    blockModel.getArgSpecial().add(checkArgChoiceBox.getValue());
+                    blockModel.getInputs().add(argNameField.getText());
+                    break;
+                case "field_input":
+                    blockModel.getArgSpecial().add(null);
+                    blockModel.getFields().add(argNameField.getText());
+                    break;
+                case "field_checkbox":
+                    if (argChecked.isSelected()) {
+                        blockModel.getArgSpecial().add("true");
+                    } else {
+                        blockModel.getArgSpecial().add("false");
+                    }
+                    blockModel.getFields().add(argNameField.getText());
+                    break;
+            }
+
+        } else {
+            AlertUtils.error("Invalid Argument Name", "Please give a name to your argument.");
+        }
     }
+
+    @FXML
+    private void handleEditArg(){
+
+    }
+
 
     @FXML
     private void handleEditExtensions(){
@@ -102,7 +151,6 @@ public class BlockOuputEditDialogController {
         if(isInputValid()){
             blockModel.setFileName(fileNameField.getText());
             blockModel.setText(textField.getText());
-            blockModel.setInputValueArgs(inputs);
             blockModel.setType(typeChoiceBox.getSelectionModel().getSelectedItem());
             blockModel.setColour(Integer.parseInt(colourField.getText()));
             blockModel.setToolbox(toolboxField.getText());

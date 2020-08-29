@@ -7,7 +7,6 @@ public class BlockOutput {
 
     public static void blockOutput(MainApp mainApp, BlockOutputModel blockModel, ca.goldorion.mcrpcreator.io.jsons.BlockOutput blockOutput){
         blockModel.setText(blockOutput.getMessage0());
-        blockModel.setInputValueArgs(blockOutput.getArgs());
         blockModel.setExtensions(blockOutput.getExtensions());
         blockModel.setType(blockOutput.getOutput());
         blockModel.setColour(blockOutput.getColour());

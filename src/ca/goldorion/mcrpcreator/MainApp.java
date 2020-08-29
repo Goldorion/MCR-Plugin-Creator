@@ -1,11 +1,10 @@
 package ca.goldorion.mcrpcreator;
 
 import ca.goldorion.mcrpcreator.models.BlockOutputModel;
-import ca.goldorion.mcrpcreator.models.InputValueModel;
-import ca.goldorion.mcrpcreator.ui.*;
-import ca.goldorion.mcrpcreator.ui.blocks.BlockOuputEditDialogController;
-import ca.goldorion.mcrpcreator.ui.blocks.arguments.InputValueArgumentEditController;
-import ca.goldorion.mcrpcreator.ui.blocks.arguments.InputValueArgumentListController;
+import ca.goldorion.mcrpcreator.ui.BlockOverviewController;
+import ca.goldorion.mcrpcreator.ui.BlockTypeSelectorController;
+import ca.goldorion.mcrpcreator.ui.RootLayoutController;
+import ca.goldorion.mcrpcreator.ui.blocks.BlockOutputEditDialogController;
 import ca.goldorion.mcrpcreator.ui.blocks.others.ExtensionsEditController;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -35,7 +34,7 @@ public class MainApp extends Application {
         /*
           To add new templates, write them here
          */
-        blockData.add(new BlockOutputModel("test"));
+        blockData.add(new BlockOutputModel("Block Output"));
 
     }
 
@@ -49,7 +48,6 @@ public class MainApp extends Application {
         this.primaryStage.setTitle(appName + " " + version);
 
         initRootLayout();
-
         showBlockOverview();
     }
 
@@ -115,7 +113,7 @@ public class MainApp extends Application {
             dialogStage.setScene(scene);
 
             //Set the block into the controller
-            BlockOuputEditDialogController controller = loader.getController();
+            BlockOutputEditDialogController controller = loader.getController();
             controller.setDialogStage(dialogStage);
             controller.setBlockOutputModel(blockModel);
             controller.setMainApp(this);
@@ -182,60 +180,6 @@ public class MainApp extends Application {
             e.printStackTrace();
         }
     }
-
-    public void showInputValueArgumentList(BlockOutputModel blockOutputModel){
-        try {
-            // Load the extension edit window
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("/ca/goldorion/mcrpcreator/ui/blocks/arguments/InputValueArgumentList.fxml"));
-            AnchorPane page = loader.load();
-
-            //Create the Dialog Stage
-            Stage dialogStage = new Stage();
-            dialogStage.setTitle("Edit Input Value Argument List");
-            dialogStage.initModality(Modality.WINDOW_MODAL);
-            dialogStage.initOwner(primaryStage);
-            Scene scene = new Scene(page);
-            dialogStage.setScene(scene);
-
-            InputValueArgumentListController controller = loader.getController();
-            controller.setDialogStage(dialogStage);
-            controller.setBlockOutputModel(blockOutputModel);
-            controller.setMainApp(this);
-
-            dialogStage.showAndWait();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void showInputValueArgumentEdit(BlockOutputModel blockOutputModel, InputValueModel inputValueModel){
-        try {
-            // Load the extension edit window
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("/ca/goldorion/mcrpcreator/ui/blocks/arguments/InputValueArgumentEdit.fxml"));
-            AnchorPane page = loader.load();
-
-            //Create the Dialog Stage
-            Stage dialogStage = new Stage();
-            dialogStage.setTitle("Edit Input Value Argument");
-            dialogStage.initModality(Modality.WINDOW_MODAL);
-            dialogStage.initOwner(primaryStage);
-            Scene scene = new Scene(page);
-            dialogStage.setScene(scene);
-
-            InputValueArgumentEditController controller = loader.getController();
-            controller.setArgumentStage(dialogStage);
-            controller.setBlockOutputModel(blockOutputModel);
-            controller.setInputValueModel(inputValueModel);
-            controller.setMainApp(this);
-
-            dialogStage.showAndWait();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
 
     /**
      * Returns the main stage.

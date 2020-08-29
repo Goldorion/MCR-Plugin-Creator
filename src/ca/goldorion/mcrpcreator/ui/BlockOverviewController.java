@@ -147,7 +147,7 @@ public class BlockOverviewController {
     private void handleExportBlock(){
         BlockOutputModel selectedBlock = blockTable.getSelectionModel().getSelectedItem();
         if(typeLabel.toString().contains("Output")){
-            Export.OutputProcedureBlock(mainApp, blockTable, selectedBlock);
+            Export.OutputProcedureBlock(mainApp, selectedBlock);
         }
     }
 }

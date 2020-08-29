@@ -8,13 +8,17 @@ public class BlockOutputModel {
 
     private StringProperty fileName;
     private StringProperty text;
-    private ArrayList<InputValueModel> inputValueArgs;
     private ArrayList<String> extensions;
     private StringProperty type;
     private StringProperty toolbox;
     private IntegerProperty colour;
     private ArrayList<String> fields;
     private ArrayList<String> inputs;
+
+    //Arguments
+    private ArrayList<String> argType;
+    private ArrayList<String> argName;
+    private ArrayList<String> argSpecial;
 
     //Dependencies
     private BooleanProperty bool;
@@ -26,13 +30,15 @@ public class BlockOutputModel {
     private BooleanProperty string;
     private BooleanProperty world;
 
-    private final String blockType;
+    private String blockType;
 
     public BlockOutputModel(String fileName) {
         this.fileName = new SimpleStringProperty(fileName);
         this.blockType = "Output";
         this.text = new SimpleStringProperty("");
-        this.inputValueArgs = new ArrayList<>();
+        this.argType =new ArrayList<>();
+        this.argName = new ArrayList<>();
+        this.argSpecial = new ArrayList<>();
         this.extensions = new ArrayList();
         this.type = new SimpleStringProperty("");
         this.toolbox = new SimpleStringProperty("");
@@ -48,6 +54,9 @@ public class BlockOutputModel {
         this.string = new SimpleBooleanProperty(false);
         this.world = new SimpleBooleanProperty(false);
 
+    }
+
+    public BlockOutputModel() {
     }
 
     public String getFileName() {
@@ -191,11 +200,27 @@ public class BlockOutputModel {
         this.inputs = inputs;
     }
 
-    public ArrayList<InputValueModel> getInputValueArgs() {
-        return inputValueArgs;
+    public ArrayList<String> getArgType() {
+        return argType;
     }
 
-    public void setInputValueArgs(ArrayList<InputValueModel> inputValueArgs) {
-        this.inputValueArgs = inputValueArgs;
+    public void setArgType(ArrayList<String> argType) {
+        this.argType = argType;
+    }
+
+    public ArrayList<String> getArgName() {
+        return argName;
+    }
+
+    public void setArgName(ArrayList<String> argName) {
+        this.argName = argName;
+    }
+
+    public ArrayList<String> getArgSpecial() {
+        return argSpecial;
+    }
+
+    public void setArgSpecial(ArrayList<String> argSpecial) {
+        this.argSpecial = argSpecial;
     }
 }

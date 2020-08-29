@@ -8,7 +8,7 @@ public class MCreator {
     private ArrayList<String> inputs;
     private ArrayList<Dependencies> dependencies;
 
-    public MCreator(String toolbox_id, ArrayList<String> fields,/* ArrayList<String> inputs,*/ ArrayList<Dependencies> dependencies) {
+    public MCreator(String toolbox_id, ArrayList<String> fields, ArrayList<String> inputs, ArrayList<Dependencies> dependencies) {
         this.toolbox_id = toolbox_id;
         this.dependencies = dependencies;
         this.fields = fields;
