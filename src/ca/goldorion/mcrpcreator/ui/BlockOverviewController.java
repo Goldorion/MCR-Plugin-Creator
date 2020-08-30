@@ -23,6 +23,10 @@ public class BlockOverviewController {
     @FXML
     private Label textLabel;
     @FXML
+    private Label inputsLabel;
+    @FXML
+    private Label fieldsLabel;
+    @FXML
     private Label extensionsLabel;
     @FXML
     private Label typeLabel;
@@ -62,6 +66,8 @@ public class BlockOverviewController {
         if(block != null){
             fileNameLabel.setText(block.getFileName());
             textLabel.setText(block.getText());
+            inputsLabel.setText(block.getInputs().toString());
+            fieldsLabel.setText(block.getFields().toString());
             extensionsLabel.setText(block.getExtensions().toString());
             typeLabel.setText(block.getBlockType() + " - "+ block.getType());
             colourLabel.setText(Integer.toString(block.getColour()));
@@ -98,14 +104,6 @@ public class BlockOverviewController {
             }
 
             dependenciesLabel.setText(dependencies);
-        } else {
-            fileNameLabel.setText("None");
-            textLabel.setText("None");
-            extensionsLabel.setText("None");
-            typeLabel.setText("None");
-            colourLabel.setText("None");
-            toolboxLabel.setText("None");
-            dependenciesLabel.setText("None");
         }
     }
 

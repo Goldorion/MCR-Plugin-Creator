@@ -2,6 +2,8 @@
 
 ## 0.2.0
 * **Added the possibility to add arguments (input value, field input and field checkbox)**
+// To create a new argument, change the choice box and give a name, then create on "New".
+// You won't see the argument on the list, but it's saved. Just save the block and re open it to see them.
 * **Added the possibility to add extension**
 * **Added support to use all dependencies**
 * Added the type of procedure block in the list view

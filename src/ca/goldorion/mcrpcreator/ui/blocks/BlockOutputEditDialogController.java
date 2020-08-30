@@ -12,6 +12,8 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.util.List;
+
 public class BlockOutputEditDialogController {
 
     private MainApp mainApp;
@@ -86,8 +88,8 @@ public class BlockOutputEditDialogController {
 
         fileNameField.setText(blockModel.getFileName());
         textField.setText(blockModel.getText());
-        //List list = FXCollections.observableList(blockModel.getArgName());
-        //argList.setItems((ObservableList) list);
+        List list = FXCollections.observableList(blockModel.getArgName());
+        argList.setItems((ObservableList) list);
         typeChoiceBox.getSelectionModel().select(blockModel.getType());
         colourField.setText(Integer.toString(blockModel.getColour()));
         toolboxField.setText(blockModel.getToolbox());
@@ -129,6 +131,7 @@ public class BlockOutputEditDialogController {
                     blockModel.getFields().add(argNameField.getText());
                     break;
             }
+           // argList.getItems().add(argNameField.getText());
 
         } else {
             AlertUtils.error("Invalid Argument Name", "Please give a name to your argument.");
