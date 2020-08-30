@@ -23,7 +23,7 @@ import java.io.IOException;
 
 public class MainApp extends Application {
     public static final String appName = "MCR Plugin Creator";
-    public static final String version = "0.2.0";
+    public static final String version = "0.3.0";
 
     private Stage primaryStage;
     private BorderPane rootLayout;
