@@ -5,9 +5,9 @@ MCR Plugin Creator is a software to help at the MCreator plugin creation. Curren
 **This project is not official. It is not affiliated with the respective owners and maintainers of MCreator and Pylo.**
 
 ## Features
-- Create output procedure blocks (without arguments)
+- Create output procedure blocks
 - Export output procedure blocks in a JSON file
-- Import procedure blocks (with the settings of the output procedure blocks)
+- Import procedure blocks (arguments are not imported)
 
 ## Installation Instructions
 1. Pre-built binaries can be found on the [Release page of this repository](https://github.com/Goldorion/MCR-Plugin-Creator/releases).
