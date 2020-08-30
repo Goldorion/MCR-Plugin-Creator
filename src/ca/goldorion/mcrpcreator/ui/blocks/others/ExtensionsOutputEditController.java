@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
-public class ExtensionsEditController {
+public class ExtensionsOutputEditController {
     @FXML
     private CheckBox achievementBox;
     @FXML
@@ -51,7 +51,7 @@ public class ExtensionsEditController {
         this.extensionStage = extensionStage;
     }
 
-    public ExtensionsEditController() {
+    public ExtensionsOutputEditController() {
     }
 
     @FXML

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class BlockOutput {
     private String message0;
     private ArrayList args0;
+    private boolean inputsInline;
     private String output;
     private int colour;
     private ArrayList extensions;
@@ -37,6 +38,7 @@ public class BlockOutput {
         this.message0 = message0;
         this.args0 = args;
         this.extensions = extensions;
+        this.inputsInline = true;
         this.output = output;
         this.colour = colour;
         this.mcreator = mcreator;

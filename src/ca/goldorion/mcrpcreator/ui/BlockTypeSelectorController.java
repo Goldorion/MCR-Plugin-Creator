@@ -2,6 +2,7 @@ package ca.goldorion.mcrpcreator.ui;
 
 import ca.goldorion.mcrpcreator.MainApp;
 import ca.goldorion.mcrpcreator.models.BlockOutputModel;
+import ca.goldorion.mcrpcreator.models.ProceduralBlockModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -13,7 +14,7 @@ public class BlockTypeSelectorController {
     @FXML
     ChoiceBox<String> choiceBox;
 
-    ObservableList<String> availableChoices = FXCollections.observableArrayList("Output Procedure Block");
+    ObservableList<String> availableChoices = FXCollections.observableArrayList("Output Block");
 
     private MainApp mainApp;
 
@@ -32,14 +33,27 @@ public class BlockTypeSelectorController {
     private void handleConfirmButton(){
         String selectedChoice = choiceBox.getSelectionModel().getSelectedItem();
 
-        if(selectedChoice == "Output Procedure Block"){
-            BlockOutputModel tempBlock = new BlockOutputModel("");
-            boolean okClicked = mainApp.showBlockOutputEditDialog(tempBlock);
-            if(okClicked){
-                mainApp.getBlockData().add(tempBlock);
-            }
 
-            dialogStage.close();
+        switch (selectedChoice) {
+            case "Output Block": {
+                BlockOutputModel tempBlock = new BlockOutputModel("");
+                boolean okClicked = mainApp.showBlockOutputEditDialog(tempBlock);
+                if (okClicked) {
+                    mainApp.getBlockData().add(tempBlock);
+                }
+
+                dialogStage.close();
+                break;
+            }
+            case "Procedural Block": {
+                ProceduralBlockModel tempBlock = new ProceduralBlockModel("");
+                boolean okClicked = mainApp.showProceduralBlockEditDialog(tempBlock);
+                if (okClicked) {
+                    mainApp.getBlockData().add(tempBlock);
+                }
+                dialogStage.close();
+                break;
+            }
         }
     }
 

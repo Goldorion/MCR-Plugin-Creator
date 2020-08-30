@@ -1,7 +1,7 @@
 package ca.goldorion.mcrpcreator.ui.blocks;
 
 import ca.goldorion.mcrpcreator.MainApp;
-import ca.goldorion.mcrpcreator.models.BlockOutputModel;
+import ca.goldorion.mcrpcreator.models.ProceduralBlockModel;
 import ca.goldorion.mcrpcreator.utils.AlertUtils;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,11 +14,11 @@ import javafx.stage.Stage;
 
 import java.util.List;
 
-public class BlockOutputEditDialogController {
+public class ProceduralBlockEditDialogController {
 
     private MainApp mainApp;
     private Stage dialogStage;
-    private BlockOutputModel blockModel;
+    private ProceduralBlockModel blockModel;
     private boolean okClicked = false;
 
     @FXML
@@ -39,11 +39,6 @@ public class BlockOutputEditDialogController {
     private final ObservableList<String> availableArgChecks = FXCollections.observableArrayList("All", "Boolean", "Direction", "MCItem", "MCItemBlock", "Number", "String");
     @FXML
     private CheckBox argChecked;
-
-
-    @FXML
-    ChoiceBox<String> typeChoiceBox;
-    ObservableList<String> availableTypes = FXCollections.observableArrayList("Boolean", "Direction", "MCItem", "MCItemBlock", "Number", "String");
 
     @FXML
     private TextField colourField;
@@ -68,8 +63,6 @@ public class BlockOutputEditDialogController {
 
     @FXML
     private void initialize(){
-        typeChoiceBox.setItems(availableTypes);
-        typeChoiceBox.getSelectionModel().selectFirst();
 
         argTypeChoiceBox.setItems(availableArgTypes);
         argTypeChoiceBox.getSelectionModel().selectFirst();
@@ -83,14 +76,13 @@ public class BlockOutputEditDialogController {
         this.dialogStage = dialogStage;
     }
 
-    public void setBlockOutputModel(BlockOutputModel blockModel){
+    public void setProceduralBlockModel(ProceduralBlockModel blockModel){
         this.blockModel = blockModel;
 
         fileNameField.setText(blockModel.getFileName());
         textField.setText(blockModel.getText());
         List list = FXCollections.observableList(blockModel.getArgName());
         argList.setItems((ObservableList) list);
-        typeChoiceBox.getSelectionModel().select(blockModel.getType());
         colourField.setText(Integer.toString(blockModel.getColour()));
         toolboxField.setText(blockModel.getToolbox());
         boolBox.setSelected(blockModel.isBool());
@@ -146,7 +138,7 @@ public class BlockOutputEditDialogController {
 
     @FXML
     private void handleEditExtensions(){
-        mainApp.showExtensionsOutputEdit(blockModel);
+        mainApp.showExtensionsProceduralEdit(blockModel);
     }
 
     @FXML
@@ -154,10 +146,6 @@ public class BlockOutputEditDialogController {
         if(isInputValid()){
             blockModel.setFileName(fileNameField.getText());
             blockModel.setText(textField.getText());
-            blockModel.setType(typeChoiceBox.getSelectionModel().getSelectedItem());
-            if(blockModel.getType().equals("")){
-                blockModel.setType("Boolean");
-            }
             blockModel.setColour(Integer.parseInt(colourField.getText()));
             blockModel.setToolbox(toolboxField.getText());
             blockModel.setBool(boolBox.isSelected());

@@ -1,11 +1,14 @@
 package ca.goldorion.mcrpcreator;
 
 import ca.goldorion.mcrpcreator.models.BlockOutputModel;
+import ca.goldorion.mcrpcreator.models.ProceduralBlockModel;
 import ca.goldorion.mcrpcreator.ui.BlockOverviewController;
 import ca.goldorion.mcrpcreator.ui.BlockTypeSelectorController;
 import ca.goldorion.mcrpcreator.ui.RootLayoutController;
 import ca.goldorion.mcrpcreator.ui.blocks.BlockOutputEditDialogController;
-import ca.goldorion.mcrpcreator.ui.blocks.others.ExtensionsEditController;
+import ca.goldorion.mcrpcreator.ui.blocks.ProceduralBlockEditDialogController;
+import ca.goldorion.mcrpcreator.ui.blocks.others.ExtensionsOutputEditController;
+import ca.goldorion.mcrpcreator.ui.blocks.others.ExtensionsProceduralEditController;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,7 +27,7 @@ public class MainApp extends Application {
 
     private Stage primaryStage;
     private BorderPane rootLayout;
-    private final ObservableList<BlockOutputModel> blockData = FXCollections.observableArrayList();
+    private final ObservableList blockData = FXCollections.observableArrayList();
 
     public static void main(String[] args) {
         launch(args);
@@ -38,7 +41,7 @@ public class MainApp extends Application {
 
     }
 
-    public ObservableList<BlockOutputModel> getBlockData(){
+    public ObservableList getBlockData(){
         return blockData;
     }
 
@@ -106,7 +109,7 @@ public class MainApp extends Application {
 
             //Create the Dialog Stage
             Stage dialogStage = new Stage();
-            dialogStage.setTitle("Edit Block Output");
+            dialogStage.setTitle("Edit Output Block");
             dialogStage.initModality(Modality.WINDOW_MODAL);
             dialogStage.initOwner(primaryStage);
             Scene scene = new Scene(page);
@@ -155,11 +158,11 @@ public class MainApp extends Application {
         }
     }
 
-    public void showExtensionsEdit(BlockOutputModel blockOutputModel){
+    public void showExtensionsOutputEdit(BlockOutputModel blockOutputModel){
         try {
             // Load the extension edit window
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("/ca/goldorion/mcrpcreator/ui/blocks/others/ExtensionsEdit.fxml"));
+            loader.setLocation(MainApp.class.getResource("/ca/goldorion/mcrpcreator/ui/blocks/others/ExtensionsOutputEdit.fxml"));
             AnchorPane page = loader.load();
 
             //Create the Dialog Stage
@@ -170,9 +173,35 @@ public class MainApp extends Application {
             Scene scene = new Scene(page);
             dialogStage.setScene(scene);
 
-            ExtensionsEditController controller = loader.getController();
+            ExtensionsOutputEditController controller = loader.getController();
             controller.setExtensionStage(dialogStage);
             controller.setBlockOutputModel(blockOutputModel);
+            controller.setMainApp(this);
+
+            dialogStage.showAndWait();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void showExtensionsProceduralEdit(ProceduralBlockModel proceduralBlockModel){
+        try {
+            // Load the extension edit window
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("/ca/goldorion/mcrpcreator/ui/blocks/others/ExtensionsProceduralEdit.fxml"));
+            AnchorPane page = loader.load();
+
+            //Create the Dialog Stage
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Edit Extensions");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            ExtensionsProceduralEditController controller = loader.getController();
+            controller.setExtensionStage(dialogStage);
+            controller.setProceduralBlockModel(proceduralBlockModel);
             controller.setMainApp(this);
 
             dialogStage.showAndWait();
@@ -186,5 +215,36 @@ public class MainApp extends Application {
      */
     public Stage getPrimaryStage() {
         return primaryStage;
+    }
+
+    public boolean showProceduralBlockEditDialog(ProceduralBlockModel blockModel) {
+        try{
+            // Load the fxml file and create a new stage for the popup dialog.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("/ca/goldorion/mcrpcreator/ui/blocks/ProceduralBlockEditDialog.fxml"));
+            AnchorPane page = loader.load();
+
+            //Create the Dialog Stage
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Edit Procedure Block");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            //Set the block into the controller
+            ProceduralBlockEditDialogController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+            controller.setProceduralBlockModel(blockModel);
+            controller.setMainApp(this);
+
+            dialogStage.showAndWait();
+
+            return controller.isOkClicked();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }

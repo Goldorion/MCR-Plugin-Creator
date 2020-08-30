@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="307.0" prefWidth="0.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.goldorion.mcrpcreator.ui.blocks.others.ExtensionsEditController">
+<AnchorPane prefHeight="307.0" prefWidth="0.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.goldorion.mcrpcreator.ui.blocks.others.ExtensionsOutputEditController">
    <children>
       <Label layoutX="287.0" prefHeight="29.0" prefWidth="80.0" text="Extensions" />
       <GridPane layoutX="23.0" layoutY="48.0" prefHeight="218.0" prefWidth="607.0">

@@ -13,6 +13,8 @@ public class BlockOutput {
         blockModel.setToolbox(blockOutput.getMcreator().getToolbox_id());
         blockModel.setFields(blockOutput.getMcreator().getFields());
         blockModel.setInputs(blockOutput.getMcreator().getInputs());
+
+        //Dependencies
         blockModel.setBool(blockOutput.getMcreator().getDependencies().contains("boolean"));
         blockModel.setDirection(blockOutput.getMcreator().getDependencies().contains("direction"));
         blockModel.setEntity(blockOutput.getMcreator().getDependencies().contains("entity"));
@@ -21,6 +23,7 @@ public class BlockOutput {
         blockModel.setMap(blockOutput.getMcreator().getDependencies().contains("map"));
         blockModel.setString(blockOutput.getMcreator().getDependencies().contains("string"));
         blockModel.setWorld(blockOutput.getMcreator().getDependencies().contains("world"));
+
         mainApp.getBlockData().add(blockModel);
 
     }

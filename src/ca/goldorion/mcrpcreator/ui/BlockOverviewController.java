@@ -18,6 +18,7 @@ public class BlockOverviewController {
     @FXML
     private TableColumn<BlockOutputModel, String> typeColumn;
 
+
     @FXML
     private Label fileNameLabel;
     @FXML
