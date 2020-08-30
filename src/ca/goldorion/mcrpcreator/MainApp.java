@@ -61,7 +61,7 @@ public class MainApp extends Application {
         try {
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("/ca/goldorion/mcrpcreator/ui/RootLayout.fxml"));
+            loader.setLocation(MainApp.class.getResource("/RootLayout.fxml"));
             this.rootLayout = loader.load();
 
             // Show the scene containing the root layout.
@@ -86,7 +86,7 @@ public class MainApp extends Application {
             // Load block overview.
             FXMLLoader loader = new FXMLLoader();
 
-            loader.setLocation(MainApp.class.getResource("/ca/goldorion/mcrpcreator/ui/BlockOverview.fxml"));
+            loader.setLocation(MainApp.class.getResource("/BlockOverview.fxml"));
             AnchorPane blockOverview = loader.load();
 
             // Set block overview into the center of root layout.
@@ -104,7 +104,7 @@ public class MainApp extends Application {
         try{
             // Load the fxml file and create a new stage for the popup dialog.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("/ca/goldorion/mcrpcreator/ui/blocks/BlockOutputEditDialog.fxml"));
+            loader.setLocation(MainApp.class.getResource("/BlockOutputEditDialog.fxml"));
             AnchorPane page = loader.load();
 
             //Create the Dialog Stage
@@ -135,7 +135,7 @@ public class MainApp extends Application {
         try {
             // Load the block selector menu window
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("/ca/goldorion/mcrpcreator/ui/BlockTypeSelector.fxml"));
+            loader.setLocation(MainApp.class.getResource("/BlockTypeSelector.fxml"));
             AnchorPane page = loader.load();
 
             //Create the Dialog Stage
@@ -162,7 +162,7 @@ public class MainApp extends Application {
         try {
             // Load the extension edit window
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("/ca/goldorion/mcrpcreator/ui/blocks/others/ExtensionsOutputEdit.fxml"));
+            loader.setLocation(MainApp.class.getResource("/ExtensionsOutputEdit.fxml"));
             AnchorPane page = loader.load();
 
             //Create the Dialog Stage
@@ -188,7 +188,7 @@ public class MainApp extends Application {
         try {
             // Load the extension edit window
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("/ca/goldorion/mcrpcreator/ui/blocks/others/ExtensionsProceduralEdit.fxml"));
+            loader.setLocation(MainApp.class.getResource("/ExtensionsProceduralEdit.fxml"));
             AnchorPane page = loader.load();
 
             //Create the Dialog Stage
@@ -221,7 +221,7 @@ public class MainApp extends Application {
         try{
             // Load the fxml file and create a new stage for the popup dialog.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("/ca/goldorion/mcrpcreator/ui/blocks/ProceduralBlockEditDialog.fxml"));
+            loader.setLocation(MainApp.class.getResource("/ProceduralBlockEditDialog.fxml"));
             AnchorPane page = loader.load();
 
             //Create the Dialog Stage
