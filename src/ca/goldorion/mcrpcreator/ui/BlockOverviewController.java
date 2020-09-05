@@ -3,13 +3,20 @@ package ca.goldorion.mcrpcreator.ui;
 import ca.goldorion.mcrpcreator.MainApp;
 import ca.goldorion.mcrpcreator.io.export.Export;
 import ca.goldorion.mcrpcreator.io.export.PluginJsonExport;
+import ca.goldorion.mcrpcreator.io.jsons.PluginJson;
 import ca.goldorion.mcrpcreator.models.BlockModel;
 import ca.goldorion.mcrpcreator.models.PluginJsonModel;
 import ca.goldorion.mcrpcreator.utils.AlertUtils;
+import com.google.gson.Gson;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 
 public class BlockOverviewController {
 
@@ -40,6 +47,23 @@ public class BlockOverviewController {
     private void initialize(){
         // Initialize the block table with the two columns.
         fileNameColumn.setCellValueFactory(cellData -> cellData.getValue().fileNameProperty());
+
+        Gson gson = new Gson();
+        File file = new File(System.getProperty("user.dir") + "/export/plugin.json");
+        try {
+            PluginJson pluginJson = gson.fromJson(new BufferedReader(new FileReader(file)), PluginJson.class);
+            PluginJsonModel pluginJsonModel = new PluginJsonModel();
+            if(file != null){
+                pluginId.setText(pluginJson.getId());
+                pluginMin.setText(String.valueOf(pluginJson.getMinversion()));
+                pluginName.setText(pluginJson.getInfos().getName());
+                pluginDesc.setText(pluginJson.getInfos().getDescription());
+                pluginVersion.setText(pluginJson.getInfos().getVersion());
+                pluginAuthor.setText(pluginJson.getInfos().getAuthor());
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     public void setMainApp(MainApp mainApp){
