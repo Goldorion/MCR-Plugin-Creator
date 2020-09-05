@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.0
+* **Added the possibility to create Procedural procedure blocks**
+* Added a setting to change the inputsInline
+
 ## 0.3.0
 * **Added the possibility to add arguments (input value, field input and field checkbox)**
 // To create a new argument, change the choice box and give a name, then create on "New".

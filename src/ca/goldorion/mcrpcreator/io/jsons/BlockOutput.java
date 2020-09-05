@@ -33,6 +33,9 @@ public class BlockOutput {
         return mcreator;
     }
 
+    public boolean isInputsInline() {
+        return inputsInline;
+    }
 
     public BlockOutput(String message0, ArrayList args, ArrayList extensions, String output, int colour, MCreator mcreator) {
         this.message0 = message0;

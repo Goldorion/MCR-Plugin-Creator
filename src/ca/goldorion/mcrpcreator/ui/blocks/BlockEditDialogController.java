@@ -1,7 +1,7 @@
 package ca.goldorion.mcrpcreator.ui.blocks;
 
 import ca.goldorion.mcrpcreator.MainApp;
-import ca.goldorion.mcrpcreator.models.ProceduralBlockModel;
+import ca.goldorion.mcrpcreator.models.BlockModel;
 import ca.goldorion.mcrpcreator.utils.AlertUtils;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,15 +14,21 @@ import javafx.stage.Stage;
 
 import java.util.List;
 
-public class ProceduralBlockEditDialogController {
+public class BlockEditDialogController {
 
     private MainApp mainApp;
     private Stage dialogStage;
-    private ProceduralBlockModel blockModel;
+    private BlockModel blockModel;
     private boolean okClicked = false;
 
     @FXML
     private TextField fileNameField;
+
+    @FXML
+    private ChoiceBox<String> blockTypeChoiceBox;
+    private final ObservableList<String> availableBlockTypes = FXCollections.observableArrayList(
+            "Procedural Block", "Output Block");
+
     @FXML
     private TextField textField;
 
@@ -31,14 +37,26 @@ public class ProceduralBlockEditDialogController {
     ListView argList;
     @FXML
     private ChoiceBox<String> argTypeChoiceBox;
-    private final ObservableList<String> availableArgTypes = FXCollections.observableArrayList("input_value", "field_input", "field_checkbox");
+    private final ObservableList<String> availableArgTypes = FXCollections.observableArrayList(
+            "input_value", "field_input", "field_checkbox");
     @FXML
     private TextField argNameField;
     @FXML
     private ChoiceBox<String> checkArgChoiceBox;
-    private final ObservableList<String> availableArgChecks = FXCollections.observableArrayList("All", "Boolean", "Direction", "MCItem", "MCItemBlock", "Number", "String");
+    private final ObservableList<String> availableArgChecks = FXCollections.observableArrayList(
+            "All", "Boolean", "Direction", "MCItem", "MCItemBlock", "Number", "String");
     @FXML
     private CheckBox argChecked;
+
+    @FXML
+    private CheckBox inputsInlineCheckBox;
+    @FXML
+    private CheckBox nextStatementCheckBox;
+
+    @FXML
+    ChoiceBox<String> typeChoiceBox;
+    ObservableList<String> availableTypes = FXCollections.observableArrayList(
+            "Boolean", "Direction", "MCItem", "MCItemBlock", "Number", "String");
 
     @FXML
     private TextField colourField;
@@ -63,6 +81,11 @@ public class ProceduralBlockEditDialogController {
 
     @FXML
     private void initialize(){
+        typeChoiceBox.setItems(availableTypes);
+        typeChoiceBox.getSelectionModel().selectFirst();
+
+        blockTypeChoiceBox.setItems(availableBlockTypes);
+        blockTypeChoiceBox.getSelectionModel().selectFirst();
 
         argTypeChoiceBox.setItems(availableArgTypes);
         argTypeChoiceBox.getSelectionModel().selectFirst();
@@ -76,13 +99,18 @@ public class ProceduralBlockEditDialogController {
         this.dialogStage = dialogStage;
     }
 
-    public void setProceduralBlockModel(ProceduralBlockModel blockModel){
+    public void setBlockOutputModel(BlockModel blockModel){
         this.blockModel = blockModel;
 
         fileNameField.setText(blockModel.getFileName());
+        blockTypeChoiceBox.getSelectionModel().select(blockModel.getBlockType());
+
         textField.setText(blockModel.getText());
         List list = FXCollections.observableList(blockModel.getArgName());
         argList.setItems((ObservableList) list);
+        inputsInlineCheckBox.setSelected(blockModel.isInputsInline());
+        nextStatementCheckBox.setSelected(blockModel.isNextStatement());
+        typeChoiceBox.getSelectionModel().select(blockModel.getType());
         colourField.setText(Integer.toString(blockModel.getColour()));
         toolboxField.setText(blockModel.getToolbox());
         boolBox.setSelected(blockModel.isBool());
@@ -138,14 +166,24 @@ public class ProceduralBlockEditDialogController {
 
     @FXML
     private void handleEditExtensions(){
-        mainApp.showExtensionsProceduralEdit(blockModel);
+        mainApp.showExtensionsBlockEdit(blockModel);
     }
 
     @FXML
     private void handleOk(){
         if(isInputValid()){
             blockModel.setFileName(fileNameField.getText());
+            blockModel.setBlockType(blockTypeChoiceBox.getSelectionModel().getSelectedItem());
+            if(blockModel.getBlockType().isEmpty()){
+                blockModel.setBlockType("Procedural Block");
+            }
             blockModel.setText(textField.getText());
+            blockModel.setInputsInline(inputsInlineCheckBox.isSelected());
+            blockModel.setNextStatement(nextStatementCheckBox.isSelected());
+            blockModel.setType(typeChoiceBox.getSelectionModel().getSelectedItem());
+            if(blockModel.getType().equals("")){
+                blockModel.setType("Boolean");
+            }
             blockModel.setColour(Integer.parseInt(colourField.getText()));
             blockModel.setToolbox(toolboxField.getText());
             blockModel.setBool(boolBox.isSelected());

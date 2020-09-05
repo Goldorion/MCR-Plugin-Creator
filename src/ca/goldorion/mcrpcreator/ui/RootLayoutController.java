@@ -2,7 +2,7 @@ package ca.goldorion.mcrpcreator.ui;
 
 import ca.goldorion.mcrpcreator.MainApp;
 import ca.goldorion.mcrpcreator.io.input.Import;
-import ca.goldorion.mcrpcreator.models.BlockOutputModel;
+import ca.goldorion.mcrpcreator.models.BlockModel;
 import ca.goldorion.mcrpcreator.utils.AlertUtils;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
@@ -16,9 +16,9 @@ import static ca.goldorion.mcrpcreator.MainApp.version;
 public class RootLayoutController {
 
     @FXML
-    private TableView<BlockOutputModel> blockTable;
+    private TableView<BlockModel> blockTable;
     @FXML
-    private TableColumn<BlockOutputModel, String> fileNameColumn;
+    private TableColumn<BlockModel, String> fileNameColumn;
 
     private MainApp mainApp;
 

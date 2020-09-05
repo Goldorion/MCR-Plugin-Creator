@@ -1,8 +1,6 @@
-package ca.goldorion.mcrpcreator.io;
+package ca.goldorion.mcrpcreator.io.export;
 
 import ca.goldorion.mcrpcreator.MainApp;
-import ca.goldorion.mcrpcreator.io.export.OutputProcedureBlock;
-import ca.goldorion.mcrpcreator.io.export.ProceduralProcedureBlock;
 import ca.goldorion.mcrpcreator.io.jsons.*;
 import ca.goldorion.mcrpcreator.models.BlockModel;
 import ca.goldorion.mcrpcreator.utils.FileUtils;
@@ -13,19 +11,9 @@ import javafx.stage.FileChooser;
 import java.io.File;
 import java.util.ArrayList;
 
-public class Export {
+public class OutputProcedureBlock {
 
-    public static void export(MainApp mainApp, BlockModel selectedBlock){
-        if(selectedBlock.getBlockType().equals("Output Block")){
-            OutputProcedureBlock.outputProcedureBlock(mainApp, selectedBlock);
-        } else if(selectedBlock.getBlockType().equals("Procedural Block")){
-            ProceduralProcedureBlock.proceduralProcedureBlock(mainApp, selectedBlock);
-        }
-
-
-    }
-
-    private static void proceduralProcedureBlock(MainApp mainApp, BlockModel selectedBlock) {
+    public static void outputProcedureBlock(MainApp mainApp, BlockModel selectedBlock){
         FileChooser fileChooser = new FileChooser();
         FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter(
                 "JSON files", "*.json");
@@ -150,4 +138,5 @@ public class Export {
 
         }
     }
+
 }

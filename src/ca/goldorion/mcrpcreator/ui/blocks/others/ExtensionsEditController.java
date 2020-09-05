@@ -1,14 +1,14 @@
 package ca.goldorion.mcrpcreator.ui.blocks.others;
 
 import ca.goldorion.mcrpcreator.MainApp;
-import ca.goldorion.mcrpcreator.models.BlockOutputModel;
+import ca.goldorion.mcrpcreator.models.BlockModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
-public class ExtensionsOutputEditController {
+public class ExtensionsEditController {
     @FXML
     private CheckBox achievementBox;
     @FXML
@@ -40,7 +40,7 @@ public class ExtensionsOutputEditController {
     public ArrayList<String> fields = new ArrayList<>();
 
     private Stage extensionStage;
-    private BlockOutputModel blockOutputModel;
+    private BlockModel outputBlockModel;
     MainApp mainApp;
 
     @FXML
@@ -51,14 +51,14 @@ public class ExtensionsOutputEditController {
         this.extensionStage = extensionStage;
     }
 
-    public ExtensionsOutputEditController() {
+    public ExtensionsEditController() {
     }
 
     @FXML
     private void handleConfirm(){
         setExtensionsArrayLists();
-        blockOutputModel.setExtensions(extensions);
-        blockOutputModel.setFields(fields);
+        outputBlockModel.setExtensions(extensions);
+        outputBlockModel.setFields(fields);
         extensionStage.close();
     }
 
@@ -71,21 +71,21 @@ public class ExtensionsOutputEditController {
         this.mainApp = mainApp;
     }
 
-    public void setBlockOutputModel(BlockOutputModel blockOutputModel) {
-        this.blockOutputModel = blockOutputModel;
-        achievementBox.setSelected(blockOutputModel.getExtensions().contains("achievement_list_provider"));
-        biomeBox.setSelected(blockOutputModel.getExtensions().contains("biome_list_provider"));
-        biomeDicBox.setSelected(blockOutputModel.getExtensions().contains("biome_dictionary_list_provider"));
-        damageBox.setSelected(blockOutputModel.getExtensions().contains("damagesource_list_provider"));
-        dimensionsBox.setSelected(blockOutputModel.getExtensions().contains("dimension_list_provider"));
-        enchantBox.setSelected(blockOutputModel.getExtensions().contains("enhancement_list_provider"));
-        entityBox.setSelected(blockOutputModel.getExtensions().contains("entity_list_provider"));
-        gamemodeBox.setSelected(blockOutputModel.getExtensions().contains("gamemode_list_provider"));
-        guiBox.setSelected(blockOutputModel.getExtensions().contains("gui_list_provider"));
-        particleBox.setSelected(blockOutputModel.getExtensions().contains("particle_list_provider"));
-        potionBox.setSelected(blockOutputModel.getExtensions().contains("potion_list_provider"));
-        rangedItemBox.setSelected(blockOutputModel.getExtensions().contains("rangeditem_list_provider"));
-        soundBox.setSelected(blockOutputModel.getExtensions().contains("sound_list_provider"));
+    public void setBlockOutputModel(BlockModel outputBlockModel) {
+        this.outputBlockModel = outputBlockModel;
+        achievementBox.setSelected(outputBlockModel.getExtensions().contains("achievement_list_provider"));
+        biomeBox.setSelected(outputBlockModel.getExtensions().contains("biome_list_provider"));
+        biomeDicBox.setSelected(outputBlockModel.getExtensions().contains("biome_dictionary_list_provider"));
+        damageBox.setSelected(outputBlockModel.getExtensions().contains("damagesource_list_provider"));
+        dimensionsBox.setSelected(outputBlockModel.getExtensions().contains("dimension_list_provider"));
+        enchantBox.setSelected(outputBlockModel.getExtensions().contains("enhancement_list_provider"));
+        entityBox.setSelected(outputBlockModel.getExtensions().contains("entity_list_provider"));
+        gamemodeBox.setSelected(outputBlockModel.getExtensions().contains("gamemode_list_provider"));
+        guiBox.setSelected(outputBlockModel.getExtensions().contains("gui_list_provider"));
+        particleBox.setSelected(outputBlockModel.getExtensions().contains("particle_list_provider"));
+        potionBox.setSelected(outputBlockModel.getExtensions().contains("potion_list_provider"));
+        rangedItemBox.setSelected(outputBlockModel.getExtensions().contains("rangeditem_list_provider"));
+        soundBox.setSelected(outputBlockModel.getExtensions().contains("sound_list_provider"));
     }
 
     private void setExtensionsArrayLists(){

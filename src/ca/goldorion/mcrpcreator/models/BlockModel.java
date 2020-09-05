@@ -4,10 +4,13 @@ import javafx.beans.property.*;
 
 import java.util.ArrayList;
 
-public class BlockOutputModel {
+public class BlockModel {
 
     private StringProperty fileName;
+    private StringProperty blockType;
     private StringProperty text;
+    private BooleanProperty inputsInline;
+    private BooleanProperty nextStatement;
     private ArrayList<String> extensions;
     private StringProperty type;
     private StringProperty toolbox;
@@ -30,15 +33,15 @@ public class BlockOutputModel {
     private BooleanProperty string;
     private BooleanProperty world;
 
-    private String blockType;
-
-    public BlockOutputModel(String fileName) {
+    public BlockModel(String fileName) {
         this.fileName = new SimpleStringProperty(fileName);
-        this.blockType = "Output";
+        this.blockType = new SimpleStringProperty("");
         this.text = new SimpleStringProperty("");
-        this.argType =new ArrayList<>();
+        this.argType = new ArrayList<>();
         this.argName = new ArrayList<>();
         this.argSpecial = new ArrayList<>();
+        this.inputsInline = new SimpleBooleanProperty(true);
+        this.nextStatement = new SimpleBooleanProperty(true);
         this.extensions = new ArrayList();
         this.type = new SimpleStringProperty("");
         this.toolbox = new SimpleStringProperty("");
@@ -56,9 +59,6 @@ public class BlockOutputModel {
 
     }
 
-    public BlockOutputModel() {
-    }
-
     public String getFileName() {
         return fileName.get();
     }
@@ -69,6 +69,14 @@ public class BlockOutputModel {
 
     public StringProperty fileNameProperty() {
         return fileName;
+    }
+
+    public String getBlockType() {
+        return blockType.get();
+    }
+
+    public void setBlockType(String blockType) {
+        this.blockType.set(blockType);
     }
 
     public String getText() {
@@ -170,10 +178,6 @@ public class BlockOutputModel {
         this.world.set(world);
     }
 
-    public String getBlockType() {
-        return blockType;
-    }
-
     public ArrayList getExtensions() {
         return extensions;
     }
@@ -222,5 +226,25 @@ public class BlockOutputModel {
 
     public void setArgSpecial(ArrayList<String> argSpecial) {
         this.argSpecial = argSpecial;
+    }
+
+    public boolean isInputsInline() {
+        return inputsInline.get();
+    }
+
+    public void setInputsInline(boolean inputsInline) {
+        this.inputsInline.set(inputsInline);
+    }
+
+    public boolean isNextStatement() {
+        return nextStatement.get();
+    }
+
+    public BooleanProperty nextStatementProperty() {
+        return nextStatement;
+    }
+
+    public void setNextStatement(boolean nextStatement) {
+        this.nextStatement.set(nextStatement);
     }
 }

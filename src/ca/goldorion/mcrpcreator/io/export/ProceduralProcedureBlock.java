@@ -1,8 +1,6 @@
-package ca.goldorion.mcrpcreator.io;
+package ca.goldorion.mcrpcreator.io.export;
 
 import ca.goldorion.mcrpcreator.MainApp;
-import ca.goldorion.mcrpcreator.io.export.OutputProcedureBlock;
-import ca.goldorion.mcrpcreator.io.export.ProceduralProcedureBlock;
 import ca.goldorion.mcrpcreator.io.jsons.*;
 import ca.goldorion.mcrpcreator.models.BlockModel;
 import ca.goldorion.mcrpcreator.utils.FileUtils;
@@ -13,19 +11,8 @@ import javafx.stage.FileChooser;
 import java.io.File;
 import java.util.ArrayList;
 
-public class Export {
-
-    public static void export(MainApp mainApp, BlockModel selectedBlock){
-        if(selectedBlock.getBlockType().equals("Output Block")){
-            OutputProcedureBlock.outputProcedureBlock(mainApp, selectedBlock);
-        } else if(selectedBlock.getBlockType().equals("Procedural Block")){
-            ProceduralProcedureBlock.proceduralProcedureBlock(mainApp, selectedBlock);
-        }
-
-
-    }
-
-    private static void proceduralProcedureBlock(MainApp mainApp, BlockModel selectedBlock) {
+public class ProceduralProcedureBlock {
+    public static void proceduralProcedureBlock(MainApp mainApp, BlockModel selectedBlock) {
         FileChooser fileChooser = new FileChooser();
         FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter(
                 "JSON files", "*.json");
@@ -134,20 +121,22 @@ public class Export {
             } else {
                 extensions = null;
             }
-            BlockOutput blockOutput = new BlockOutput(
+            ProceduralBlock proceduralBlock = new ProceduralBlock(
                     selectedBlock.getText(),
                     args,
-                    extensions,
-                    selectedBlock.getType(),
+                    selectedBlock.isInputsInline(),
+                    selectedBlock.isNextStatement(),
+                    true,
                     selectedBlock.getColour(),
+                    extensions,
                     mcreator);
-
             //Create a Gson Builder and add the JSON in a String to create a file with the String
             Gson gson = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
-            String json = gson.toJson(blockOutput);
+            String json = gson.toJson(proceduralBlock);
             FileUtils.saveFile(file, json);
             System.out.println(json);
 
         }
     }
+
 }
