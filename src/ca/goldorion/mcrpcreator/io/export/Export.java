@@ -11,9 +11,24 @@ import javafx.stage.FileChooser;
 import java.io.File;
 import java.util.ArrayList;
 
-public class OutputProcedureBlock {
+public class Export {
 
-    public static void outputProcedureBlock(MainApp mainApp, BlockModel selectedBlock){
+    public static void export(MainApp mainApp, BlockModel selectedBlock){
+        FileChooser fileChooser = new FileChooser();
+        FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter(
+                "JSON files", "*.json");
+        fileChooser.getExtensionFilters().add(extensionFilter);
+        File file = fileChooser.showSaveDialog(mainApp.getPrimaryStage());
+        if(selectedBlock.getBlockType().equals("Output Block")){
+            OutputBlock.outputProcedureBlock(selectedBlock, file);
+        } else if(selectedBlock.getBlockType().equals("Procedural Block")){
+            ProceduralBlock.proceduralProcedureBlock(selectedBlock, file);
+        }
+
+
+    }
+
+    private static void proceduralProcedureBlock(MainApp mainApp, BlockModel selectedBlock) {
         FileChooser fileChooser = new FileChooser();
         FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter(
                 "JSON files", "*.json");
@@ -138,5 +153,4 @@ public class OutputProcedureBlock {
 
         }
     }
-
 }

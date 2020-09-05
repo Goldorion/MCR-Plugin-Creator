@@ -1,23 +1,16 @@
 package ca.goldorion.mcrpcreator.io.export;
 
-import ca.goldorion.mcrpcreator.MainApp;
 import ca.goldorion.mcrpcreator.io.jsons.*;
 import ca.goldorion.mcrpcreator.models.BlockModel;
 import ca.goldorion.mcrpcreator.utils.FileUtils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import javafx.stage.FileChooser;
 
 import java.io.File;
 import java.util.ArrayList;
 
-public class ProceduralProcedureBlock {
-    public static void proceduralProcedureBlock(MainApp mainApp, BlockModel selectedBlock) {
-        FileChooser fileChooser = new FileChooser();
-        FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter(
-                "JSON files", "*.json");
-        fileChooser.getExtensionFilters().add(extensionFilter);
-        File file = fileChooser.showSaveDialog(mainApp.getPrimaryStage());
+public class ProceduralBlock {
+    public static void proceduralProcedureBlock(BlockModel selectedBlock, File file) {
         if(file != null) {
             if(!file.getPath().endsWith(".json")) {
                 file = new File(file.getPath() + ".json");
@@ -121,7 +114,7 @@ public class ProceduralProcedureBlock {
             } else {
                 extensions = null;
             }
-            ProceduralBlock proceduralBlock = new ProceduralBlock(
+            ca.goldorion.mcrpcreator.io.jsons.ProceduralBlock proceduralBlock = new ca.goldorion.mcrpcreator.io.jsons.ProceduralBlock(
                     selectedBlock.getText(),
                     args,
                     selectedBlock.isInputsInline(),

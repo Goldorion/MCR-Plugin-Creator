@@ -1,0 +1,16 @@
+{
+  "message0": "test",
+  "inputsInline": true,
+  "nextStatement": true,
+  "previousStatement": true,
+  "colour": 100,
+  "mcreator": {
+    "toolbox_id": "worlddata",
+    "dependencies": [
+      {
+        "type": "entity",
+        "name": "entity"
+      }
+    ]
+  }
+}

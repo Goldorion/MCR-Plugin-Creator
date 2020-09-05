@@ -1,6 +1,8 @@
 package ca.goldorion.mcrpcreator.ui.blocks;
 
 import ca.goldorion.mcrpcreator.MainApp;
+import ca.goldorion.mcrpcreator.io.export.OutputBlock;
+import ca.goldorion.mcrpcreator.io.export.ProceduralBlock;
 import ca.goldorion.mcrpcreator.models.BlockModel;
 import ca.goldorion.mcrpcreator.utils.AlertUtils;
 import javafx.collections.FXCollections;
@@ -12,6 +14,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.util.List;
 
 public class BlockEditDialogController {
@@ -194,6 +197,19 @@ public class BlockEditDialogController {
             blockModel.setMap(mapBox.isSelected());
             blockModel.setString(stringBox.isSelected());
             blockModel.setWorld(worldBox.isSelected());
+
+
+            File folder = new File(System.getProperty("user.dir") + "/export/procedures/");
+            if(!folder.exists()){
+                folder.mkdirs();
+            }
+            File file = new File(System.getProperty("user.dir") + "/export/procedures/" +
+                    blockModel.getFileName() + ".json");
+            if(blockModel.getBlockType().equals("Output Block")){
+                OutputBlock.outputProcedureBlock(blockModel, file);
+            } else if(blockModel.getBlockType().equals("Procedural Block")){
+                ProceduralBlock.proceduralProcedureBlock(blockModel, file);
+            }
 
             okClicked = true;
             dialogStage.close();
