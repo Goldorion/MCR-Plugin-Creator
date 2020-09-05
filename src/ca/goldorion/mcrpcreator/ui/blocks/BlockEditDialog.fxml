@@ -98,7 +98,7 @@
                                 <buttons>
                                   <Button mnemonicParsing="false" onAction="#handleNewArg" prefHeight="43.0" prefWidth="220.0" text="New" />
                                     <Button mnemonicParsing="false" onAction="#handleEditArg" prefHeight="42.0" text="Edit" />
-                                    <Button mnemonicParsing="false" prefHeight="42.0" text="Delete" />
+                                    <Button mnemonicParsing="false" onAction="#handleDeleteArg" prefHeight="42.0" text="Delete" />
                                 </buttons>
                               </ButtonBar>
                            </children>

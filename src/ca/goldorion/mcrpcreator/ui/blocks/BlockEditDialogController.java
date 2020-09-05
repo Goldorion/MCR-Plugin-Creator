@@ -171,7 +171,23 @@ public class BlockEditDialogController {
     }
 
     @FXML
+    private void handleDeleteArg(){
+        blockModel.getArgName().remove(argList.getSelectionModel().getSelectedIndex());
+        blockModel.getArgSpecial().remove(argList.getSelectionModel().getSelectedIndex());
+        blockModel.getArgType().remove(argList.getSelectionModel().getSelectedIndex());
+    }
+
+    @FXML
     private void handleEditArg(){
+        argNameField.setText(blockModel.getArgName().get(argList.getSelectionModel().getSelectedIndex()));
+        argTypeChoiceBox.getSelectionModel().select(blockModel.getArgType().get(argList.getSelectionModel().getSelectedIndex()));
+        if(blockModel.getArgSpecial().get(argList.getSelectionModel().getSelectedIndex()).equals("true")){
+            argChecked.setSelected(true);
+        }else if(blockModel.getArgSpecial().get(argList.getSelectionModel().getSelectedIndex()).equals("false")){
+            argChecked.setSelected(false);
+        } else if(!blockModel.getArgSpecial().get(argList.getSelectionModel().getSelectedIndex()).isEmpty()){
+            checkArgChoiceBox.getSelectionModel().select(argList.getSelectionModel().getSelectedIndex());
+        }
 
     }
 

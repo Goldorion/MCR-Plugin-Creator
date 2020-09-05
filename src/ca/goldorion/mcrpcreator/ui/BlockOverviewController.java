@@ -152,7 +152,6 @@ public class BlockOverviewController {
                 pluginAuthor.setText(pluginJson.getInfos().getAuthor());
             }
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
         }
     }
 }

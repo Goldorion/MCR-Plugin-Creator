@@ -2,10 +2,12 @@
 
 ## 0.4.0
 * **Added the possibility to create Procedural procedure blocks**
-* Added a setting to change the inputsInline
-* A JSON file is now generated when we save the block.
+* **Added the possibility to make AI task blocks**
+* Added a setting to change the inputsInline setting
+* A JSON file will be now generated after a block has been saved.
 * Added the possibility to create the plugin.json
-* Added the possibility to make AI task blocks
+* Implemented the "Delete" and "Edit" buttons for the arguments
+// To save the argument you edited, you need to re-click on new, and then, delete the old argument.
 
 ## 0.3.0
 * **Added the possibility to add arguments (input value, field input and field checkbox)**
