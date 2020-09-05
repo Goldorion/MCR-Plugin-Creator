@@ -28,6 +28,11 @@ public class BlockEditDialogController {
     private TextField fileNameField;
 
     @FXML
+    private ChoiceBox<String> blockElementChoiceBox;
+    private final ObservableList<String> availableBlockElements = FXCollections.observableArrayList(
+            "aitasks", "procedures");
+
+    @FXML
     private ChoiceBox<String> blockTypeChoiceBox;
     private final ObservableList<String> availableBlockTypes = FXCollections.observableArrayList(
             "Procedural Block", "Output Block");
@@ -87,6 +92,9 @@ public class BlockEditDialogController {
         typeChoiceBox.setItems(availableTypes);
         typeChoiceBox.getSelectionModel().selectFirst();
 
+
+        blockElementChoiceBox.setItems(availableBlockElements);
+        blockElementChoiceBox.getSelectionModel().select("procedures");
         blockTypeChoiceBox.setItems(availableBlockTypes);
         blockTypeChoiceBox.getSelectionModel().selectFirst();
 
@@ -106,6 +114,7 @@ public class BlockEditDialogController {
         this.blockModel = blockModel;
 
         fileNameField.setText(blockModel.getFileName());
+        blockElementChoiceBox.getSelectionModel().select(blockModel.getBlockElement());
         blockTypeChoiceBox.getSelectionModel().select(blockModel.getBlockType());
 
         textField.setText(blockModel.getText());
@@ -176,6 +185,8 @@ public class BlockEditDialogController {
     private void handleOk(){
         if(isInputValid()){
             blockModel.setFileName(fileNameField.getText());
+            blockModel.setBlockElement(blockElementChoiceBox.getSelectionModel().getSelectedItem());
+
             blockModel.setBlockType(blockTypeChoiceBox.getSelectionModel().getSelectedItem());
             if(blockModel.getBlockType().isEmpty()){
                 blockModel.setBlockType("Procedural Block");
@@ -198,16 +209,16 @@ public class BlockEditDialogController {
             blockModel.setString(stringBox.isSelected());
             blockModel.setWorld(worldBox.isSelected());
 
-
-            File folder = new File(System.getProperty("user.dir") + "/export/procedures/");
-            if(!folder.exists()){
+            File folder = new File(System.getProperty("user.dir") + "/export/" +
+                    blockElementChoiceBox.getSelectionModel().getSelectedItem() + "/");
+            if (!folder.exists()) {
                 folder.mkdirs();
             }
-            File file = new File(System.getProperty("user.dir") + "/export/procedures/" +
-                    blockModel.getFileName() + ".json");
-            if(blockModel.getBlockType().equals("Output Block")){
+            File file = new File(System.getProperty("user.dir") + "/export/" +
+                    blockElementChoiceBox.getSelectionModel().getSelectedItem() + "/"+ blockModel.getFileName() + ".json");
+            if (blockModel.getBlockType().equals("Output Block")) {
                 OutputBlock.outputProcedureBlock(blockModel, file);
-            } else if(blockModel.getBlockType().equals("Procedural Block")){
+            } else if (blockModel.getBlockType().equals("Procedural Block")) {
                 ProceduralBlock.proceduralProcedureBlock(blockModel, file);
             }
 

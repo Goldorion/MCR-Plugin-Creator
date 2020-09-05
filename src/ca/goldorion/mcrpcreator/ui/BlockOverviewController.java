@@ -45,25 +45,10 @@ public class BlockOverviewController {
 
     @FXML
     private void initialize(){
-        // Initialize the block table with the two columns.
-        fileNameColumn.setCellValueFactory(cellData -> cellData.getValue().fileNameProperty());
+        loadPluginJson();
 
-        Gson gson = new Gson();
-        File file = new File(System.getProperty("user.dir") + "/export/plugin.json");
-        try {
-            PluginJson pluginJson = gson.fromJson(new BufferedReader(new FileReader(file)), PluginJson.class);
-            PluginJsonModel pluginJsonModel = new PluginJsonModel();
-            if(file != null){
-                pluginId.setText(pluginJson.getId());
-                pluginMin.setText(String.valueOf(pluginJson.getMinversion()));
-                pluginName.setText(pluginJson.getInfos().getName());
-                pluginDesc.setText(pluginJson.getInfos().getDescription());
-                pluginVersion.setText(pluginJson.getInfos().getVersion());
-                pluginAuthor.setText(pluginJson.getInfos().getAuthor());
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        // Initialize the block table
+        fileNameColumn.setCellValueFactory(cellData -> cellData.getValue().fileNameProperty());
     }
 
     public void setMainApp(MainApp mainApp){
@@ -149,6 +134,25 @@ public class BlockOverviewController {
         } else{
             AlertUtils.error("Please correct invalid field(s)", message);
             return false;
+        }
+    }
+
+    private void loadPluginJson(){
+        Gson gson = new Gson();
+        File file = new File(System.getProperty("user.dir") + "/export/plugin.json");
+        try {
+            PluginJson pluginJson = gson.fromJson(new BufferedReader(new FileReader(file)), PluginJson.class);
+            PluginJsonModel pluginJsonModel = new PluginJsonModel();
+            if(file != null){
+                pluginId.setText(pluginJson.getId());
+                pluginMin.setText(String.valueOf(pluginJson.getMinversion()));
+                pluginName.setText(pluginJson.getInfos().getName());
+                pluginDesc.setText(pluginJson.getInfos().getDescription());
+                pluginVersion.setText(pluginJson.getInfos().getVersion());
+                pluginAuthor.setText(pluginJson.getInfos().getAuthor());
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
     }
 }

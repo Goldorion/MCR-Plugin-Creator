@@ -21,7 +21,6 @@
       <element id="directory" name="libs">
         <element id="library" level="project" name="gson-2.8.6" />
       </element>
-      <element id="directory" name="export" />
     </root>
   </artifact>
 </component>

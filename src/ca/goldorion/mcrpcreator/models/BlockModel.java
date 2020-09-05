@@ -8,6 +8,7 @@ public class BlockModel {
 
     private StringProperty fileName;
     private StringProperty blockType;
+    private StringProperty blockElement;
     private StringProperty text;
     private BooleanProperty inputsInline;
     private BooleanProperty nextStatement;
@@ -36,6 +37,7 @@ public class BlockModel {
     public BlockModel(String fileName) {
         this.fileName = new SimpleStringProperty(fileName);
         this.blockType = new SimpleStringProperty("");
+        this.blockElement = new SimpleStringProperty("");
         this.text = new SimpleStringProperty("");
         this.argType = new ArrayList<>();
         this.argName = new ArrayList<>();
@@ -246,5 +248,13 @@ public class BlockModel {
 
     public void setNextStatement(boolean nextStatement) {
         this.nextStatement.set(nextStatement);
+    }
+
+    public String getBlockElement() {
+        return blockElement.get();
+    }
+
+    public void setBlockElement(String blockElement) {
+        this.blockElement.set(blockElement);
     }
 }

@@ -139,7 +139,6 @@
                </children>
             </GridPane>
             <Label prefHeight="85.0" prefWidth="192.0" text="Block Type" GridPane.rowIndex="1" />
-            <ChoiceBox fx:id="blockTypeChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <GridPane GridPane.columnIndex="1" GridPane.rowIndex="6">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -158,6 +157,19 @@
             </GridPane>
             <Label prefHeight="72.0" prefWidth="172.0" text="Args Settings" GridPane.rowIndex="4" />
             <CheckBox fx:id="inputsInlineCheckBox" mnemonicParsing="false" selected="true" text="inputsInline" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <GridPane GridPane.columnIndex="1" GridPane.rowIndex="1">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <ChoiceBox fx:id="blockTypeChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" />
+                  <ChoiceBox fx:id="blockElementChoiceBox" prefHeight="31.0" prefWidth="169.0" />
+               </children>
+            </GridPane>
          </children>
       </GridPane>
       <ButtonBar layoutX="292.0" layoutY="962.0" prefHeight="45.0" prefWidth="178.0">

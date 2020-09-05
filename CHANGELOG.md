@@ -5,6 +5,7 @@
 * Added a setting to change the inputsInline
 * A JSON file is now generated when we save the block.
 * Added the possibility to create the plugin.json
+* Added the possibility to make AI task blocks
 
 ## 0.3.0
 * **Added the possibility to add arguments (input value, field input and field checkbox)**
