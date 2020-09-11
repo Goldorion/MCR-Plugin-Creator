@@ -23,6 +23,7 @@ public class BlockModel {
     private ArrayList<String> argType;
     private ArrayList<String> argName;
     private ArrayList<String> argSpecial;
+    private ArrayList<String> argsListCode;
 
     //Dependencies
     private BooleanProperty bool;
@@ -42,6 +43,7 @@ public class BlockModel {
         this.argType = new ArrayList<>();
         this.argName = new ArrayList<>();
         this.argSpecial = new ArrayList<>();
+        this.argsListCode = new ArrayList<>();
         this.inputsInline = new SimpleBooleanProperty(true);
         this.nextStatement = new SimpleBooleanProperty(true);
         this.extensions = new ArrayList();
@@ -256,5 +258,13 @@ public class BlockModel {
 
     public void setBlockElement(String blockElement) {
         this.blockElement.set(blockElement);
+    }
+
+    public ArrayList<String> getArgsListCode() {
+        return argsListCode;
+    }
+
+    public void setArgsListCode(ArrayList<String> argsListCode) {
+        this.argsListCode = argsListCode;
     }
 }

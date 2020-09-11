@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.5.0
+* Added the possibility to create code file (Java file only)
+TOUS LES BOUTONS NE SONT PAS FONCTIONNELS
+En train de travailler sur l'implémentation du fichier de code pour lesblocs
+
 ## 0.4.0
 * **Added the possibility to create Procedural procedure blocks**
 * **Added the possibility to make AI task blocks**

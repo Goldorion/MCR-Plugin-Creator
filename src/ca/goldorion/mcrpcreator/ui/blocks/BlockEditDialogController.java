@@ -5,13 +5,11 @@ import ca.goldorion.mcrpcreator.io.export.OutputBlock;
 import ca.goldorion.mcrpcreator.io.export.ProceduralBlock;
 import ca.goldorion.mcrpcreator.models.BlockModel;
 import ca.goldorion.mcrpcreator.utils.AlertUtils;
+import ca.goldorion.mcrpcreator.utils.FileUtils;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -87,11 +85,22 @@ public class BlockEditDialogController {
     @FXML
     private CheckBox worldBox;
 
+    //Code & Generators
+    @FXML
+    private TextField nameArgCode;
+    @FXML
+    private RadioButton inputRadioButton;
+    @FXML
+    private RadioButton fieldRadioButton;
+    @FXML
+    private TextArea codeArea;
+    @FXML
+    private TextField genNameField;
+
     @FXML
     private void initialize(){
         typeChoiceBox.setItems(availableTypes);
         typeChoiceBox.getSelectionModel().selectFirst();
-
 
         blockElementChoiceBox.setItems(availableBlockElements);
         blockElementChoiceBox.getSelectionModel().select("procedures");
@@ -149,10 +158,12 @@ public class BlockEditDialogController {
                 case "input_value":
                     blockModel.getArgSpecial().add(checkArgChoiceBox.getValue());
                     blockModel.getInputs().add(argNameField.getText());
+                    blockModel.getArgsListCode().add("${input$" + argNameField + "}");
                     break;
                 case "field_input":
                     blockModel.getArgSpecial().add(null);
                     blockModel.getFields().add(argNameField.getText());
+                    blockModel.getArgsListCode().add("${field$" + argNameField + "}");
                     break;
                 case "field_checkbox":
                     if (argChecked.isSelected()) {
@@ -161,9 +172,9 @@ public class BlockEditDialogController {
                         blockModel.getArgSpecial().add("false");
                     }
                     blockModel.getFields().add(argNameField.getText());
+                    blockModel.getArgsListCode().add("${field$" + argNameField + "}");
                     break;
             }
-           // argList.getItems().add(argNameField.getText());
 
         } else {
             AlertUtils.error("Invalid Argument Name", "Please give a name to your argument.");
@@ -175,6 +186,7 @@ public class BlockEditDialogController {
         blockModel.getArgName().remove(argList.getSelectionModel().getSelectedIndex());
         blockModel.getArgSpecial().remove(argList.getSelectionModel().getSelectedIndex());
         blockModel.getArgType().remove(argList.getSelectionModel().getSelectedIndex());
+        blockModel.getArgsListCode().remove(argList.getSelectionModel().getSelectedIndex());
     }
 
     @FXML
@@ -247,7 +259,59 @@ public class BlockEditDialogController {
     private void handleCancel(){
         dialogStage.close();
     }
+    
+    //Code
+    @FXML
+    private void handleInputRadio(){
+        inputRadioButton.setSelected(true);
+        fieldRadioButton.setSelected(false);
+    }
+    @FXML
+    private void handleFieldRadio(){
+        fieldRadioButton.setSelected(true);
+        inputRadioButton.setSelected(false);
+    }
+    
+    @FXML
+    private void handleAddArgCode(){
+        String arg = "";
+        if(inputRadioButton.isSelected()){
+            arg = "${input$" + nameArgCode.getText() + "}";
+        } else if(fieldRadioButton.isSelected()){
+            arg = "${field$" + nameArgCode.getText() + "}";
+        }
+        
+        codeArea.appendText(arg);
+    }
 
+    @FXML
+    private void handleSaveCode(){
+        if(!fileNameField.getText().isEmpty()) {
+            if (!genNameField.getText().isEmpty()) {
+                if (!codeArea.getParagraphs().toString().isEmpty()) {
+                    String path = System.getProperty("user.dir") +"/export/" + genNameField.getText() + "/"
+                            + blockElementChoiceBox.getSelectionModel().getSelectedItem() + "/";
+                    File folder = new File(path);
+                    if(!folder.exists()){
+                        folder.mkdirs();
+                    }
+                    File file = new File(path + fileNameField.getText() + ".java.ftl");
+                    FileUtils.saveFile(file, codeArea.getText());
+                } else {
+                    AlertUtils.error("No code", "The code area is empty. " +
+                            "Please add a code, before saving your file.");
+                }
+            } else {
+                AlertUtils.error("Please add a generator");
+            }
+        } else {
+            AlertUtils.error("No file name", "Your block does not have afile name." +
+                    " Please add one before saving your block.");
+        }
+    }
+
+
+    //Others
     private boolean isInputValid() {
         String message = "";
         if(fileNameField.getText() == null || fileNameField.getText().length() == 0){
