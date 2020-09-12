@@ -64,11 +64,5 @@ public class AlertUtils {
         alert.showAndWait();
     }
 
-    public static void info(String contentText){
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setContentText(contentText);
-        alert.showAndWait();
-    }
-
 
 }

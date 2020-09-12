@@ -96,9 +96,9 @@ public class BlockEditDialogController {
     @FXML
     private TextArea codeArea;
     @FXML
-    private ChoiceBox<String> generatorsChoiceBox;
+    ChoiceBox<String> generatorsChoiceBox;
     ObservableList<String> availableGens = FXCollections.observableArrayList(
-            "forge-1.12.2", "forge-1.14.4", "forge-1.15.2", "fabric-1.16.3", "spigot-1.16.2");
+            "All", "forge-1.12.2", "forge-1.14.4", "forge-1.15.2", "fabric-1.16.3", "spigot-1.16.2");
 
     @FXML
     private void initialize(){
@@ -117,7 +117,7 @@ public class BlockEditDialogController {
         checkArgChoiceBox.getSelectionModel().selectFirst();
 
         generatorsChoiceBox.setItems(availableGens);
-        generatorsChoiceBox.getSelectionModel().select(2);
+        generatorsChoiceBox.getSelectionModel().select(3);
     }
 
     public void setDialogStage(Stage dialogStage){
@@ -290,26 +290,31 @@ public class BlockEditDialogController {
     }
 
     @FXML
-    private void handleSaveCode(){
-        if(!fileNameField.getText().isEmpty()) {
-                if (!codeArea.getParagraphs().toString().isEmpty()) {
-                    String path = System.getProperty("user.dir") +"/export/"
-                            + generatorsChoiceBox.getSelectionModel().getSelectedItem()
-                            + "/" + blockElementChoiceBox.getSelectionModel().getSelectedItem() + "/";
-                    File folder = new File(path);
-                    if(!folder.exists()){
-                        folder.mkdirs();
-                    }
-                    File file = new File(path + fileNameField.getText() + ".java.ftl");
-                    FileUtils.saveFile(file, codeArea.getText());
-                    AlertUtils.info(fileNameField.getText() + " has ben successfully created for "
+    private void handleSaveCode() {
+        if (!fileNameField.getText().isEmpty()) {
+            if (!codeArea.getParagraphs().toString().isEmpty()) {
+                if (!generatorsChoiceBox.getSelectionModel().getSelectedItem().equals("All")) {
+                    createCodeFile(generatorsChoiceBox.getSelectionModel().getSelectedItem());
+                    AlertUtils.info("Info", "File created", fileNameField.getText()
+                            + "code file has been successfully created for "
                             + generatorsChoiceBox.getSelectionModel().getSelectedItem() + ".");
                 } else {
-                    AlertUtils.error("No code", "The code area is empty. " +
-                            "Please add a code, before saving your file.");
+                    for (String generator : generatorsChoiceBox.getItems()) {
+                        if (!generator.equals("All")) {
+                            createCodeFile(generator);
+                        }
+                    }
+                    AlertUtils.info("Info", "Files created", fileNameField.getText()
+                            + "code files have been successfully created for "
+                            + generatorsChoiceBox.getSelectionModel().getSelectedItem() + ".");
                 }
+
+            } else {
+                AlertUtils.error("No code", "The code area is empty. " +
+                        "Please add a code, before saving your file.");
+            }
         } else {
-            AlertUtils.error("No file name", "Your block does not have afile name." +
+            AlertUtils.error("No file name", "Your block does not have a file name." +
                     " Please add one before saving your block.");
         }
     }
@@ -341,7 +346,7 @@ public class BlockEditDialogController {
                     + fileNameField.getText() + ".java.ftl");
             if(file.exists()){
                 file.delete();
-                AlertUtils.info(fileNameField.getText() + " has ben successfully removed for "
+                AlertUtils.info("Info", "File removed", fileNameField.getText() + " has ben successfully removed for "
                         + generatorsChoiceBox.getSelectionModel().getSelectedItem() + ".");
             } else{
                 AlertUtils.error("No file found", fileNameField.getText() + ".java.ftl doesn't exist for "
@@ -380,6 +385,17 @@ public class BlockEditDialogController {
             AlertUtils.error(dialogStage, "Invalid Field(s)", "Please correct invalid field(s)", message);
             return false;
         }
+    }
+
+    private void createCodeFile(String generator) {
+        String path = System.getProperty("user.dir") +"/export/" + generator + "/" +
+                blockElementChoiceBox.getSelectionModel().getSelectedItem() + "/";
+        File folder = new File(path);
+        if (!folder.exists()) {
+            folder.mkdirs();
+        }
+        File file = new File(path + fileNameField.getText() + ".java.ftl");
+        FileUtils.saveFile(file, codeArea.getText());
     }
 
     public void setMainApp(MainApp mainApp) {
