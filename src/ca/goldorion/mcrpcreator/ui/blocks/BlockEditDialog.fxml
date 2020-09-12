@@ -189,24 +189,25 @@
                   </GridPane>
                </children>
             </GridPane>
-            <GridPane prefHeight="933.0" prefWidth="519.0" GridPane.columnIndex="1">
+            <GridPane prefHeight="868.0" prefWidth="358.0" GridPane.columnIndex="1">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
-                <RowConstraints maxHeight="730.0" minHeight="10.0" prefHeight="561.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="472.39996948242185" minHeight="10.0" prefHeight="373.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="927.0" minHeight="10.0" prefHeight="661.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <GridPane prefHeight="570.0" prefWidth="538.0">
+                  <GridPane prefHeight="730.0" prefWidth="359.0">
                     <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="266.0" minWidth="10.0" prefWidth="119.2" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="462.60000762939455" minWidth="10.0" prefWidth="239.60000000000002" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="266.0" minWidth="10.0" prefWidth="116.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="462.60000762939455" minWidth="10.0" prefWidth="243.0" />
                     </columnConstraints>
                     <rowConstraints>
-                      <RowConstraints maxHeight="372.0" minHeight="10.0" prefHeight="61.599999999999994" vgrow="SOMETIMES" />
-                      <RowConstraints maxHeight="597.3999961853027" minHeight="10.0" prefHeight="168.8" vgrow="SOMETIMES" />
-                      <RowConstraints maxHeight="361.20001525878905" minHeight="0.0" prefHeight="276.4" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="422.0" minHeight="10.0" prefHeight="144.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="597.3999961853027" minHeight="10.0" prefHeight="130.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="597.3999961853027" minHeight="10.0" prefHeight="190.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="597.3999961853027" minHeight="10.0" prefHeight="154.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="597.3999961853027" minHeight="10.0" prefHeight="558.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
                         <Label prefHeight="232.0" prefWidth="222.0" text="Code Args" />
@@ -248,54 +249,16 @@
                               </GridPane>
                            </children>
                         </GridPane>
-                        <GridPane GridPane.columnIndex="1" GridPane.rowIndex="2">
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                          </rowConstraints>
-                           <children>
-                              <GridPane GridPane.rowIndex="2">
-                                <columnConstraints>
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="146.0" minWidth="0.0" prefWidth="29.999996185302734" />
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="349.8" minWidth="10.0" prefWidth="226.79999999999998" />
-                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="189.0" minWidth="10.0" prefWidth="184.0" />
-                                </columnConstraints>
-                                <rowConstraints>
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                </rowConstraints>
-                                 <children>
-                                    <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1">
-                                      <buttons>
-                                          <Button mnemonicParsing="false" text="Edit" />
-                                        <Button mnemonicParsing="false" onAction="#handleSaveCode" text="Save" />
-                                          <Button mnemonicParsing="false" text="Remove" />
-                                      </buttons>
-                                    </ButtonBar>
-                                 </children>
-                              </GridPane>
-                              <ListView prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
-                              <TextField fx:id="genNameField" />
-                           </children>
-                        </GridPane>
                         <TextArea fx:id="codeArea" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <GridPane GridPane.rowIndex="2">
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                          </rowConstraints>
-                           <children>
-                              <Label prefHeight="171.0" prefWidth="186.0" text="Generator Name" />
-                              <Label prefHeight="137.0" prefWidth="182.0" text="Generators" GridPane.rowIndex="1" />
-                           </children>
-                        </GridPane>
+                        <ChoiceBox fx:id="generatorsChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label prefHeight="254.0" prefWidth="208.0" text="Generator" GridPane.rowIndex="2" />
+                        <ButtonBar prefHeight="57.0" prefWidth="222.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                          <buttons>
+                            <Button mnemonicParsing="false" onAction="#handleSaveCode" prefHeight="30.0" prefWidth="167.0" text="Save" />
+                              <Button mnemonicParsing="false" onAction="#handleRemoveCode" prefHeight="31.0" text="Remove" />
+                          </buttons>
+                        </ButtonBar>
+                        <Button mnemonicParsing="false" onAction="#handleEditCode" prefHeight="31.0" prefWidth="147.0" text="Edit" GridPane.rowIndex="3" />
                      </children>
                   </GridPane>
                </children>

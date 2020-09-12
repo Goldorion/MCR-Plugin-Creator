@@ -39,7 +39,7 @@ public class FileUtils {
 
                 while((line = reader.readLine()) != null){
 
-                    text.append(line);
+                    text.append(line + "\n");
                 }
                 reader.close();
 

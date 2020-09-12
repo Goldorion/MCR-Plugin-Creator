@@ -64,6 +64,7 @@ public class BlockEditDialogController {
     ObservableList<String> availableTypes = FXCollections.observableArrayList(
             "Boolean", "Direction", "MCItem", "MCItemBlock", "Number", "String");
 
+    //Dependencies
     @FXML
     private TextField colourField;
     @FXML
@@ -95,7 +96,9 @@ public class BlockEditDialogController {
     @FXML
     private TextArea codeArea;
     @FXML
-    private TextField genNameField;
+    private ChoiceBox<String> generatorsChoiceBox;
+    ObservableList<String> availableGens = FXCollections.observableArrayList(
+            "forge-1.12.2", "forge-1.14.4", "forge-1.15.2", "fabric-1.16.3", "spigot-1.16.2");
 
     @FXML
     private void initialize(){
@@ -113,6 +116,8 @@ public class BlockEditDialogController {
         checkArgChoiceBox.setItems(availableArgChecks);
         checkArgChoiceBox.getSelectionModel().selectFirst();
 
+        generatorsChoiceBox.setItems(availableGens);
+        generatorsChoiceBox.getSelectionModel().select(2);
     }
 
     public void setDialogStage(Stage dialogStage){
@@ -287,26 +292,62 @@ public class BlockEditDialogController {
     @FXML
     private void handleSaveCode(){
         if(!fileNameField.getText().isEmpty()) {
-            if (!genNameField.getText().isEmpty()) {
                 if (!codeArea.getParagraphs().toString().isEmpty()) {
-                    String path = System.getProperty("user.dir") +"/export/" + genNameField.getText() + "/"
-                            + blockElementChoiceBox.getSelectionModel().getSelectedItem() + "/";
+                    String path = System.getProperty("user.dir") +"/export/"
+                            + generatorsChoiceBox.getSelectionModel().getSelectedItem()
+                            + "/" + blockElementChoiceBox.getSelectionModel().getSelectedItem() + "/";
                     File folder = new File(path);
                     if(!folder.exists()){
                         folder.mkdirs();
                     }
                     File file = new File(path + fileNameField.getText() + ".java.ftl");
                     FileUtils.saveFile(file, codeArea.getText());
+                    AlertUtils.info(fileNameField.getText() + " has ben successfully created for "
+                            + generatorsChoiceBox.getSelectionModel().getSelectedItem() + ".");
                 } else {
                     AlertUtils.error("No code", "The code area is empty. " +
                             "Please add a code, before saving your file.");
                 }
-            } else {
-                AlertUtils.error("Please add a generator");
-            }
         } else {
             AlertUtils.error("No file name", "Your block does not have afile name." +
                     " Please add one before saving your block.");
+        }
+    }
+
+    @FXML
+    private void handleEditCode(){
+        if(!fileNameField.getText().isEmpty()){
+            File file = new File(System.getProperty("user.dir") +"/export/"
+                    + generatorsChoiceBox.getSelectionModel().getSelectedItem()
+                    + "/" + blockElementChoiceBox.getSelectionModel().getSelectedItem() + "/"
+                    + fileNameField.getText() + ".java.ftl");
+            if(file.exists()) {
+                String code = FileUtils.loadContent(file);
+                codeArea.setText("");
+                codeArea.setText(code);
+            } else{
+                AlertUtils.error("No file found", fileNameField.getText() + ".java.ftl doesn't exist for "
+                        + generatorsChoiceBox.getSelectionModel().getSelectedItem() + ".");
+            }
+        }
+    }
+
+    @FXML
+    private void handleRemoveCode(){
+        if(!fileNameField.getText().isEmpty()){
+            File file = new File(System.getProperty("user.dir") +"/export/"
+                    + generatorsChoiceBox.getSelectionModel().getSelectedItem()
+                    + "/" + blockElementChoiceBox.getSelectionModel().getSelectedItem() + "/"
+                    + fileNameField.getText() + ".java.ftl");
+            if(file.exists()){
+                file.delete();
+                AlertUtils.info(fileNameField.getText() + " has ben successfully removed for "
+                        + generatorsChoiceBox.getSelectionModel().getSelectedItem() + ".");
+            } else{
+                AlertUtils.error("No file found", fileNameField.getText() + ".java.ftl doesn't exist for "
+                        + generatorsChoiceBox.getSelectionModel().getSelectedItem() + ".");
+            }
+
         }
     }
 
