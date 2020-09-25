@@ -63,13 +63,16 @@ public class BlockEditDialogController {
     @FXML
     ChoiceBox<String> typeChoiceBox;
     ObservableList<String> availableTypes = FXCollections.observableArrayList(
-            "Boolean", "Direction", "MCItem", "MCItemBlock", "Number", "String");
+            "Advancement", "Boolean", "Direction", "MCItem", "MCItemBlock", "Number", "String");
 
-    //Dependencies
     @FXML
     private TextField colourField;
     @FXML
     private TextField toolboxField;
+
+    //Dependencies
+    @FXML
+    private CheckBox advancementBox;
     @FXML
     private CheckBox boolBox;
     @FXML
@@ -140,6 +143,7 @@ public class BlockEditDialogController {
         typeChoiceBox.getSelectionModel().select(blockModel.getType());
         colourField.setText(Integer.toString(blockModel.getColour()));
         toolboxField.setText(blockModel.getToolbox());
+        advancementBox.setSelected(blockModel.isAdvancement());
         boolBox.setSelected(blockModel.isBool());
         directionBox.setSelected(blockModel.isDirection());
         entityBox.setSelected(blockModel.isEntity());
@@ -234,6 +238,7 @@ public class BlockEditDialogController {
             }
             blockModel.setColour(Integer.parseInt(colourField.getText()));
             blockModel.setToolbox(toolboxField.getText());
+            blockModel.setAdvancement(advancementBox.isSelected());
             blockModel.setBool(boolBox.isSelected());
             blockModel.setDirection(directionBox.isSelected());
             blockModel.setEntity(entityBox.isSelected());

@@ -26,6 +26,7 @@ public class BlockModel {
     private ArrayList<String> argsListCode;
 
     //Dependencies
+    private BooleanProperty advancement;
     private BooleanProperty bool;
     private BooleanProperty direction;
     private BooleanProperty entity;
@@ -52,6 +53,7 @@ public class BlockModel {
         this.colour = new SimpleIntegerProperty();
         this.fields = new ArrayList<>();
         this.inputs = new ArrayList<>();
+        this.advancement = new SimpleBooleanProperty(false);
         this.bool = new SimpleBooleanProperty(false);
         this.direction = new SimpleBooleanProperty(false);
         this.entity = new SimpleBooleanProperty(false);
@@ -118,6 +120,19 @@ public class BlockModel {
     public void setColour(int colour) {
         this.colour.set(colour);
     }
+
+    public boolean isAdvancement() {
+        return advancement.get();
+    }
+
+    public BooleanProperty advancementProperty() {
+        return advancement;
+    }
+
+    public void setAdvancement(boolean advancement) {
+        this.advancement.set(advancement);
+    }
+
     public boolean isBool() {
         return bool.get();
     }

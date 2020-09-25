@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
 <AnchorPane prefHeight="974.0" prefWidth="1035.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.goldorion.mcrpcreator.ui.blocks.BlockEditDialogController">
    <children>
       <ButtonBar layoutX="295.0" layoutY="928.0" prefHeight="45.0" prefWidth="178.0">
@@ -21,8 +33,8 @@
          <children>
             <GridPane prefHeight="958.0" prefWidth="753.0">
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="506.0" minWidth="10.0" prefWidth="135.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="632.0" minWidth="10.0" prefWidth="621.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="506.0" minWidth="10.0" prefWidth="107.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="632.0" minWidth="10.0" prefWidth="560.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints maxHeight="107.0" minHeight="10.0" prefHeight="62.0" vgrow="SOMETIMES" />
@@ -53,20 +65,23 @@
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
                     <rowConstraints>
+                        <RowConstraints />
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <CheckBox fx:id="boolBox" mnemonicParsing="false" text="boolean" />
-                        <CheckBox fx:id="directionBox" mnemonicParsing="false" text="direction" GridPane.columnIndex="1" />
-                        <CheckBox fx:id="entityBox" mnemonicParsing="false" text="entity" GridPane.rowIndex="1" />
-                        <CheckBox fx:id="integerBox" mnemonicParsing="false" text="int (x, y, z)" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <CheckBox fx:id="itemstackBox" mnemonicParsing="false" text="itemstack" GridPane.rowIndex="2" />
-                        <CheckBox fx:id="mapBox" mnemonicParsing="false" text="map (cmdparams)" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <CheckBox fx:id="stringBox" mnemonicParsing="false" text="string" GridPane.rowIndex="3" />
-                        <CheckBox fx:id="worldBox" mnemonicParsing="false" text="world" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <CheckBox fx:id="advancementBox" mnemonicParsing="false" text="advancement" GridPane.rowIndex="1" />
+                        <CheckBox fx:id="boolBox" mnemonicParsing="false" text="boolean" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <CheckBox fx:id="directionBox" mnemonicParsing="false" text="direction" GridPane.rowIndex="2" />
+                        <CheckBox fx:id="entityBox" mnemonicParsing="false" prefHeight="23.0" prefWidth="78.0" text="entity" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <CheckBox fx:id="integerBox" mnemonicParsing="false" text="int (x, y, z)" GridPane.rowIndex="3" />
+                        <CheckBox fx:id="itemstackBox" mnemonicParsing="false" text="itemstack" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <CheckBox fx:id="mapBox" mnemonicParsing="false" text="map (cmdparams)" GridPane.rowIndex="4" />
+                        <CheckBox fx:id="stringBox" mnemonicParsing="false" text="string" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <CheckBox fx:id="worldBox" mnemonicParsing="false" text="world" GridPane.rowIndex="5" />
                      </children>
                   </GridPane>
                   <Label prefHeight="140.0" prefWidth="195.0" text="Extensions" GridPane.rowIndex="5" />

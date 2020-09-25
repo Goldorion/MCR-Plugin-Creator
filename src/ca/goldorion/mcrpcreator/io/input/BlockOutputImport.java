@@ -26,6 +26,8 @@ public class BlockOutputImport {
             for (JsonElement spawn : dependencies) {
                 String type = spawn.getAsJsonObject().get("type").getAsString();
                 switch (type) {
+                    case "advancement":
+                        blockModel.setAdvancement(true);
                     case "boolean":
                         blockModel.setBool(true);
                         break;
@@ -77,6 +79,8 @@ public class BlockOutputImport {
             for (JsonElement spawn : dependencies) {
                 String type = spawn.getAsJsonObject().get("type").getAsString();
                 switch (type) {
+                    case "advancement":
+                        blockModel.setAdvancement(true);
                     case "boolean":
                         blockModel.setBool(true);
                         break;

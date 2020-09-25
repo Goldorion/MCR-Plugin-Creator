@@ -20,6 +20,10 @@ public class ProceduralBlock {
 
             //ArrayList to store all dependencies used in the JSON
             ArrayList<Dependencies> dependencies = new ArrayList<>();
+            if(selectedBlock.isAdvancement()){
+                Dependencies depenAdvancement = new Dependencies("advancement", "advancement");
+                dependencies.add(depenAdvancement);
+            }
             if(selectedBlock.isBool()){
                 Dependencies depenBool = new Dependencies("boolean", "boolean");
                 dependencies.add(depenBool);
