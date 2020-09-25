@@ -340,8 +340,8 @@ public class BlockEditDialogController {
     @FXML
     private void handleEditCode(){
         if(!fileNameField.getText().isEmpty()){
-            File file = new File(System.getProperty("user.dir") +"/export/"
-                    + generatorsChoiceBox.getSelectionModel().getSelectedItem()
+            File file = new File(System.getProperty("user.dir") +"/plugins/" + BlockOverviewController.getPlugin()+
+                    "/" + generatorsChoiceBox.getSelectionModel().getSelectedItem()
                     + "/" + blockElementChoiceBox.getSelectionModel().getSelectedItem() + "/"
                     + fileNameField.getText() + ".java.ftl");
             if(file.exists()) {
@@ -358,8 +358,8 @@ public class BlockEditDialogController {
     @FXML
     private void handleRemoveCode(){
         if(!fileNameField.getText().isEmpty()){
-            File file = new File(System.getProperty("user.dir") +"/export/"
-                    + generatorsChoiceBox.getSelectionModel().getSelectedItem()
+            File file = new File(System.getProperty("user.dir") +"/plugins/" + BlockOverviewController.getPlugin()+
+                    "/" + generatorsChoiceBox.getSelectionModel().getSelectedItem()
                     + "/" + blockElementChoiceBox.getSelectionModel().getSelectedItem() + "/"
                     + fileNameField.getText() + ".java.ftl");
             if(file.exists()){
@@ -406,8 +406,8 @@ public class BlockEditDialogController {
     }
 
     private void createCodeFile(String generator) {
-        String path = System.getProperty("user.dir") +"/export/" + generator + "/" +
-                blockElementChoiceBox.getSelectionModel().getSelectedItem() + "/";
+        String path = System.getProperty("user.dir") +"/plugins/" + BlockOverviewController.getPlugin()+
+                "/" + generator + "/" + blockElementChoiceBox.getSelectionModel().getSelectedItem() + "/";
         File folder = new File(path);
         if (!folder.exists()) {
             folder.mkdirs();
