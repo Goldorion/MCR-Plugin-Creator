@@ -58,9 +58,9 @@ public class ProceduralBlock {
             }
 
             //MCreator object with the dependencies object
-            ArrayList fields = !selectedBlock.getFields().isEmpty() ? selectedBlock.getFields() : null;
-            ArrayList inputs = !selectedBlock.getInputs().isEmpty() ? selectedBlock.getInputs() : null;
-            ArrayList dependenciesFinal = !dependencies.isEmpty() ? dependencies : null;
+            ArrayList fields = selectedBlock.getFields() != null ? selectedBlock.getFields() : new ArrayList();
+            ArrayList inputs = selectedBlock.getInputs() != null ? selectedBlock.getInputs() : new ArrayList();
+            ArrayList dependenciesFinal = dependencies  != null ? dependencies : new ArrayList();
             MCreator mcreator = new MCreator(
                     selectedBlock.getToolbox(),
                     fields,
@@ -109,10 +109,10 @@ public class ProceduralBlock {
             }
             //Extensions
             ArrayList extensions;
-            if(!selectedBlock.getExtensions().isEmpty()){
+            if(!(selectedBlock.getExtensions() == null)){
                 extensions = selectedBlock.getExtensions();
             } else {
-                extensions = null;
+                extensions = new ArrayList();
             }
             ca.goldorion.mcrpcreator.io.jsons.ProceduralBlock proceduralBlock = new ca.goldorion.mcrpcreator.io.jsons.ProceduralBlock(
                     selectedBlock.getText(),

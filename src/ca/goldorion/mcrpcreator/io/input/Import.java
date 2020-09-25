@@ -6,6 +6,7 @@ import ca.goldorion.mcrpcreator.io.jsons.ProceduralBlock;
 import ca.goldorion.mcrpcreator.models.BlockModel;
 import ca.goldorion.mcrpcreator.utils.AlertUtils;
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -16,15 +17,17 @@ public class Import {
 
     public static void importFile(MainApp mainApp, File file){
         Gson gson = new Gson();
+        JsonElement jsonElement;
         try {
+            jsonElement = gson.fromJson(new BufferedReader(new FileReader(file)), JsonElement.class);
             BlockOutput blockOutput = gson.fromJson(new BufferedReader(new FileReader(file)), BlockOutput.class);
             ProceduralBlock proceduralBlock = gson.fromJson(new BufferedReader(new FileReader(file)), ProceduralBlock.class);
             BlockModel blockModel = new BlockModel(file.getName().replace(".json", ""));
             blockModel.setFileName(file.getName().replace(".json", ""));
             if(blockOutput.getOutput() != null){
-                BlockOutputImport.blockOutput(mainApp, blockModel, blockOutput);
+                BlockOutputImport.blockOutput(mainApp, blockModel, blockOutput, jsonElement);
             } else if(proceduralBlock.isPreviousStatement() == true) {
-                ProceduralBlockImport.proceduralBlock(mainApp, blockModel, proceduralBlock);
+                ProceduralBlockImport.proceduralBlock(mainApp, blockModel, proceduralBlock, jsonElement);
             } else{
                 AlertUtils.error("Block Not supported", "The block you tried to import is not supported. Please import a supported block only.");
             }
@@ -38,15 +41,17 @@ public class Import {
 
     public static BlockModel importFileReturn(MainApp mainApp, File file){
         Gson gson = new Gson();
+        JsonElement jsonElement;
         BlockModel blockModel = new BlockModel(file.getName().replace(".json", ""));
         try {
+            jsonElement = gson.fromJson(new BufferedReader(new FileReader(file)), JsonElement.class);
             BlockOutput blockOutput = gson.fromJson(new BufferedReader(new FileReader(file)), BlockOutput.class);
             ProceduralBlock proceduralBlock = gson.fromJson(new BufferedReader(new FileReader(file)), ProceduralBlock.class);
             blockModel.setFileName(file.getName().replace(".json", ""));
             if(blockOutput.getOutput() != null){
-                blockModel = BlockOutputImport.blockOutputReturn(mainApp, blockModel, blockOutput);
+                blockModel = BlockOutputImport.blockOutputReturn(mainApp, blockModel, blockOutput, jsonElement);
             } else if(proceduralBlock.isPreviousStatement() == true) {
-                blockModel =  ProceduralBlockImport.proceduralBlockReturn(mainApp, blockModel, proceduralBlock);
+                blockModel =  ProceduralBlockImport.proceduralBlockReturn(mainApp, blockModel, proceduralBlock, jsonElement);
             } else{
                 AlertUtils.error("Block Not supported", "The block you tried to import is not supported. Please import a supported block only.");
             }
