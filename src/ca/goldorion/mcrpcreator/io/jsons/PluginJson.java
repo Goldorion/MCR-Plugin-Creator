@@ -4,12 +4,12 @@ public class PluginJson {
 
     private String id;
     private long minversion;
-    private Infos infos;
+    private Info info;
 
-    public PluginJson(String id, long minversion, Infos infos) {
+    public PluginJson(String id, long minversion, Info info) {
         this.id = id;
         this.minversion = minversion;
-        this.infos = infos;
+        this.info = info;
     }
 
     public String getId() {
@@ -28,11 +28,11 @@ public class PluginJson {
         this.minversion = minversion;
     }
 
-    public Infos getInfos() {
-        return infos;
+    public Info getInfo() {
+        return info;
     }
 
-    public void setInfos(Infos infos) {
-        this.infos = infos;
+    public void setInfo(Info info) {
+        this.info = info;
     }
 }

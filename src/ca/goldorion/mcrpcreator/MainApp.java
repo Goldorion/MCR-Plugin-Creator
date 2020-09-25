@@ -3,6 +3,7 @@ package ca.goldorion.mcrpcreator;
 import ca.goldorion.mcrpcreator.models.BlockModel;
 import ca.goldorion.mcrpcreator.ui.BlockOverviewController;
 import ca.goldorion.mcrpcreator.ui.RootLayoutController;
+import ca.goldorion.mcrpcreator.ui.SelectPluginController;
 import ca.goldorion.mcrpcreator.ui.blocks.BlockEditDialogController;
 import ca.goldorion.mcrpcreator.ui.blocks.others.ExtensionsEditController;
 import javafx.application.Application;
@@ -19,7 +20,7 @@ import java.io.IOException;
 
 public class MainApp extends Application {
     public static final String appName = "MCR Plugin Creator";
-    public static final String version = "0.4.0";
+    public static final String version = "0.5.0";
 
     private Stage primaryStage;
     private BorderPane rootLayout;
@@ -46,7 +47,7 @@ public class MainApp extends Application {
         this.primaryStage.setTitle(appName + " " + version);
 
         initRootLayout();
-        showBlockOverview();
+        showSelectPlugins();
     }
 
     /**
@@ -76,11 +77,10 @@ public class MainApp extends Application {
     /**
      * Shows the block overview inside the root layout.
      */
-    public void showBlockOverview() {
+    public void showBlockOverview(String plugin) {
         try {
             // Load block overview.
             FXMLLoader loader = new FXMLLoader();
-
             loader.setLocation(MainApp.class.getResource("/BlockOverview.fxml"));
             AnchorPane blockOverview = loader.load();
 
@@ -90,7 +90,34 @@ public class MainApp extends Application {
             // Give the controller access to the main app.
             BlockOverviewController controller = loader.getController();
             controller.setMainApp(this);
+            controller.setPlugin(plugin);
+            controller.loadPluginJson();
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void showSelectPlugins() {
+        try{
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("/SelectPluginController.fxml"));
+            AnchorPane page = loader.load();
+
+            //Create the Dialog Stage
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Plugin selector");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            SelectPluginController controller = loader.getController();
+            controller.setMainApp(this);
+            controller.setStage(dialogStage);
+
+            dialogStage.showAndWait();
+
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -99,7 +126,7 @@ public class MainApp extends Application {
         try{
             // Load the fxml file and create a new stage for the popup dialog.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("/ca/goldorion/mcrpcreator/ui/blocks/BlockEditDialog.fxml"));
+            loader.setLocation(MainApp.class.getResource("/BlockEditDialog.fxml"));
             AnchorPane page = loader.load();
 
             //Create the Dialog Stage

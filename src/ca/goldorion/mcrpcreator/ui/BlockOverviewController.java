@@ -37,9 +37,14 @@ public class BlockOverviewController {
     private TextField pluginVersion;
     @FXML
     private TextField pluginAuthor;
+    @FXML
+    private TextField pluginCredits;
+    @FXML
+    private TextField pluginDependencies;
+
+    private static String plugin;
 
     private MainApp mainApp;
-
 
 
     public BlockOverviewController(){
@@ -47,7 +52,6 @@ public class BlockOverviewController {
 
     @FXML
     private void initialize(){
-        loadPluginJson();
 
         // Initialize the block table
         fileNameColumn.setCellValueFactory(cellData -> cellData.getValue().fileNameProperty());
@@ -77,6 +81,13 @@ public class BlockOverviewController {
             }
             if(!pluginAuthor.getText().isEmpty()){
                 pluginJsonModel.setAuthor(pluginAuthor.getText());
+            }
+            if(!pluginCredits.getText().isEmpty()){
+                pluginJsonModel.setCredits(pluginCredits.getText());
+            }
+            if(!pluginDependencies.getText().isEmpty()){
+                String str = pluginDependencies.getText();
+                pluginJsonModel.setDependencies(str);
             }
 
             PluginJsonExport.pluginJson(pluginJsonModel);
@@ -139,21 +150,62 @@ public class BlockOverviewController {
         }
     }
 
-    private void loadPluginJson(){
+    public void loadPluginJson(){
         Gson gson = new Gson();
-        File file = new File(System.getProperty("user.dir") + "/export/plugin.json");
+        File file = new File(System.getProperty("user.dir") + "/plugins/" + plugin + "/plugin.json");
+        System.out.println(file.getPath());
         try {
             PluginJson pluginJson = gson.fromJson(new BufferedReader(new FileReader(file)), PluginJson.class);
             PluginJsonModel pluginJsonModel = new PluginJsonModel();
-            if(file != null){
-                pluginId.setText(pluginJson.getId());
-                pluginMin.setText(String.valueOf(pluginJson.getMinversion()));
-                pluginName.setText(pluginJson.getInfos().getName());
-                pluginDesc.setText(pluginJson.getInfos().getDescription());
-                pluginVersion.setText(pluginJson.getInfos().getVersion());
-                pluginAuthor.setText(pluginJson.getInfos().getAuthor());
+            pluginJsonModel.setId(pluginJson.getId());
+            pluginId.setText(pluginJsonModel.getId());
+            if (pluginJson.getMinversion() != 0) {
+                pluginJsonModel.setMinversion(pluginJson.getMinversion());
             }
-        } catch (FileNotFoundException e) {
+            pluginMin.setText(String.valueOf(pluginJsonModel.getMinversion()));
+            if (pluginJson.getInfo().getName() != null) {
+                pluginJsonModel.setName(pluginJson.getInfo().getName());
+                pluginName.setText(pluginJsonModel.getName());
+            }
+            if (pluginJson.getInfo().getDescription() != null) {
+                pluginJsonModel.setDescription(pluginJson.getInfo().getDescription());
+                pluginDesc.setText(pluginJsonModel.getDescription());
+            }
+            if (pluginJson.getInfo().getVersion() != null) {
+                pluginJsonModel.setVersion(pluginJson.getInfo().getVersion());
+                pluginVersion.setText(pluginJsonModel.getVersion());
+            }
+            if (pluginJson.getInfo().getAuthor() != null) {
+                pluginJsonModel.setAuthor(pluginJson.getInfo().getAuthor());
+                pluginAuthor.setText(pluginJsonModel.getAuthor());
+            }
+            if(pluginJson.getInfo().getCredits() != null){
+                pluginJsonModel.setCredits(pluginJson.getInfo().getCredits());
+                pluginCredits.setText(pluginJson.getInfo().getCredits());
+            }
+            if(pluginJson.getInfo().getDependencies() != null){
+                pluginJsonModel.setDependencies(String.valueOf(pluginJson.getInfo().getDependencies()));
+                pluginDependencies.setText(String.valueOf(pluginJson.getInfo().getDependencies())
+                        .replace("[","").replace("]", ""));
+            }
+        }catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
+    }
+
+    public static String getPlugin() {
+        return plugin;
+    }
+
+    public void setPlugin(String plugin) {
+        BlockOverviewController.plugin = plugin;
+    }
+
+    public TableView<BlockModel> getBlockTable() {
+        return blockTable;
+    }
+
+    public TableColumn<BlockModel, String> getFileNameColumn() {
+        return fileNameColumn;
     }
 }

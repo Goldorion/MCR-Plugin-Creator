@@ -1,16 +1,22 @@
 package ca.goldorion.mcrpcreator.io.jsons;
 
-public class Infos {
+import java.util.List;
+
+public class Info {
     private String name;
     private String description;
     private String version;
     private String author;
+    private String credits;
+    private List<String> dependencies;
 
-    public Infos(String name, String description, String version, String author) {
+    public Info(String name, String description, String version, String author, String credits, List<String> dependencies) {
         this.name = name;
         this.description = description;
         this.version = version;
         this.author = author;
+        this.credits = credits;
+        this.dependencies = dependencies;
     }
 
     public String getName() {
@@ -43,5 +49,21 @@ public class Infos {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public String getCredits() {
+        return credits;
+    }
+
+    public void setCredits(String credits) {
+        this.credits = credits;
+    }
+
+    public List<String> getDependencies() {
+        return dependencies;
+    }
+
+    public void setDependencies(List<String> dependencies) {
+        this.dependencies = dependencies;
     }
 }

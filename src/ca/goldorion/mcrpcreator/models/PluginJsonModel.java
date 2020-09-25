@@ -1,6 +1,13 @@
 package ca.goldorion.mcrpcreator.models;
 
-import javafx.beans.property.*;
+import javafx.beans.property.LongProperty;
+import javafx.beans.property.SimpleLongProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class PluginJsonModel {
     private StringProperty id;
@@ -9,6 +16,8 @@ public class PluginJsonModel {
     private StringProperty description;
     private StringProperty version;
     private StringProperty author;
+    private StringProperty credits;
+    private List<String> dependencies;
 
     public PluginJsonModel() {
         this.id = new SimpleStringProperty();
@@ -17,6 +26,8 @@ public class PluginJsonModel {
         this.description = new SimpleStringProperty();
         this.version = new SimpleStringProperty();
         this.author = new SimpleStringProperty();
+        this.credits = new SimpleStringProperty();
+        this.dependencies = new ArrayList();
     }
 
     public String getId() {
@@ -65,8 +76,30 @@ public class PluginJsonModel {
         return author.get();
     }
 
-
     public void setAuthor(String author) {
         this.author.set(author);
+    }
+
+    public String getCredits() {
+        return credits.get();
+    }
+
+    public StringProperty creditsProperty() {
+        return credits;
+    }
+
+    public void setCredits(String credits) {
+        this.credits.set(credits);
+    }
+
+    public List<String> getDependencies() {
+        return dependencies;
+    }
+
+    public void setDependencies(String dependencies) {
+        String[] str = dependencies.split(", ");
+        List<String> al = new ArrayList<String>();
+        al = Arrays.asList(str);
+        this.dependencies = al;
     }
 }

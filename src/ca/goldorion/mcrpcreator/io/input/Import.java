@@ -36,6 +36,27 @@ public class Import {
 
     }
 
+    public static BlockModel importFileReturn(MainApp mainApp, File file){
+        Gson gson = new Gson();
+        BlockModel blockModel = new BlockModel(file.getName().replace(".json", ""));
+        try {
+            BlockOutput blockOutput = gson.fromJson(new BufferedReader(new FileReader(file)), BlockOutput.class);
+            ProceduralBlock proceduralBlock = gson.fromJson(new BufferedReader(new FileReader(file)), ProceduralBlock.class);
+            blockModel.setFileName(file.getName().replace(".json", ""));
+            if(blockOutput.getOutput() != null){
+                blockModel = BlockOutputImport.blockOutputReturn(mainApp, blockModel, blockOutput);
+            } else if(proceduralBlock.isPreviousStatement() == true) {
+                blockModel =  ProceduralBlockImport.proceduralBlockReturn(mainApp, blockModel, proceduralBlock);
+            } else{
+                AlertUtils.error("Block Not supported", "The block you tried to import is not supported. Please import a supported block only.");
+            }
+        } catch (FileNotFoundException e) {
+            AlertUtils.error("File Not Found", "Please select a file");
+            e.printStackTrace();
+        }
+        return blockModel;
+    }
+
 
 
 }

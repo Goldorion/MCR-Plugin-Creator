@@ -2,6 +2,8 @@ package ca.goldorion.mcrpcreator.utils;
 
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FileUtils {
 
@@ -52,6 +54,32 @@ public class FileUtils {
         }
 
         return "";
+
+    }
+
+    public static List<String> loadContentList(File file){
+        if(file.exists()){
+            try{
+                final BufferedReader reader = new BufferedReader(new FileReader(file));
+                List<String> plugins = new ArrayList<>();
+
+                String line;
+
+                while((line = reader.readLine()) != null){
+
+                    plugins.add(line);
+                }
+                reader.close();
+
+                return plugins;
+
+            } catch(IOException e){
+                e.printStackTrace();
+                AlertUtils.error("Could not load data", "Could not load data from file:\\n" + file.getPath());
+            }
+        }
+
+        return null;
 
     }
 }

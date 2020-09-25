@@ -40,6 +40,11 @@ public class RootLayoutController {
         AlertUtils.info("About", "About", "MCR Plugin Creator is an unofficial software to help users to create their own plugins.\n\n" +
                 "The current version of the software is: " + version);
     }
+    @FXML
+    private void handleOpenPlugin(){
+        mainApp.getBlockData().setAll();
+        mainApp.showSelectPlugins();
+    }
 
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;

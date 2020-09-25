@@ -4,6 +4,7 @@ import ca.goldorion.mcrpcreator.MainApp;
 import ca.goldorion.mcrpcreator.io.export.OutputBlock;
 import ca.goldorion.mcrpcreator.io.export.ProceduralBlock;
 import ca.goldorion.mcrpcreator.models.BlockModel;
+import ca.goldorion.mcrpcreator.ui.BlockOverviewController;
 import ca.goldorion.mcrpcreator.utils.AlertUtils;
 import ca.goldorion.mcrpcreator.utils.FileUtils;
 import javafx.collections.FXCollections;
@@ -242,18 +243,30 @@ public class BlockEditDialogController {
             blockModel.setString(stringBox.isSelected());
             blockModel.setWorld(worldBox.isSelected());
 
-            File folder = new File(System.getProperty("user.dir") + "/export/" +
-                    blockElementChoiceBox.getSelectionModel().getSelectedItem() + "/");
-            if (!folder.exists()) {
+            String path;
+            if(!blockElementChoiceBox.getSelectionModel().getSelectedItem().equals("")){
+                path = System.getProperty("user.dir") + "/plugins/" +
+                        BlockOverviewController.getPlugin() + "/" +
+                        blockElementChoiceBox.getSelectionModel().getSelectedItem() + "/";
+            } else{
+                path = System.getProperty("user.dir") + "/plugins/" +
+                        BlockOverviewController.getPlugin() + "/procedures/";
+            }
+            File folder = new File(path);
+            if(!folder.exists()){
                 folder.mkdirs();
             }
-            File file = new File(System.getProperty("user.dir") + "/export/" +
-                    blockElementChoiceBox.getSelectionModel().getSelectedItem() + "/"+ blockModel.getFileName() + ".json");
+
+            System.out.println(blockElementChoiceBox.getSelectionModel().getSelectedItem());
+
+            File file = new File(path + "/"+ blockModel.getFileName() + ".json");
             if (blockModel.getBlockType().equals("Output Block")) {
                 OutputBlock.outputProcedureBlock(blockModel, file);
             } else if (blockModel.getBlockType().equals("Procedural Block")) {
                 ProceduralBlock.proceduralProcedureBlock(blockModel, file);
             }
+
+
 
             okClicked = true;
             dialogStage.close();

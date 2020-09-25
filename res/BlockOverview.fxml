@@ -54,6 +54,8 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
                         <Label prefHeight="109.0" prefWidth="237.0" text="ID" />
@@ -68,6 +70,10 @@
                         <TextField fx:id="pluginDesc" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                         <TextField fx:id="pluginVersion" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                         <TextField fx:id="pluginAuthor" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Label prefHeight="113.0" prefWidth="390.0" text="Credits" GridPane.rowIndex="6" />
+                        <Label prefHeight="81.0" prefWidth="182.0" text="Dependencies" GridPane.rowIndex="7" />
+                        <TextField fx:id="pluginCredits" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <TextField fx:id="pluginDependencies" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                      </children>
                   </GridPane>
                   <Button layoutX="314.0" layoutY="607.0" mnemonicParsing="false" onAction="#handleSavePluginInfoButton" text="Save" />
