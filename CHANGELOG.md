@@ -3,7 +3,8 @@
 ## 0.5.0
 * Updated to MCreator 2020.5.39514
 * Added the possibility to create code file (Java file only)
-* Added the possibility to create as many plugins as wanted
+* **Added the possibility to create as many plugins as wanted and to re-open them**
+//Arguments won't be imported as it uses the same system than to import a single file.
 
 ## 0.4.0
 * **Added the possibility to create Procedural procedure blocks**

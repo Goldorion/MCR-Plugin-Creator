@@ -8,6 +8,7 @@ MCR Plugin Creator is a software to help at the MCreator plugin creation. Curren
 - Create AI tasks and Procedure blocks (output/procedural)
 - Export blocks and plugin.json in a JSON file
 - Import AI task/procedure blocks (arguments are not imported)
+- Create as much plugins as wanted and re-open them later (arguments are not imported)
 
 ## Installation Instructions
 1. Pre-built binaries can be found on the [Release page of this repository](https://github.com/Goldorion/MCR-Plugin-Creator/releases).
@@ -21,7 +22,7 @@ MCR Plugin Creator is a software to help at the MCreator plugin creation. Curren
 
 Dev - [Goldorion](https://github.com/Goldorion)
 
-Thanks to all of you helping in reporting bugs, using or anything else.
+Thanks to all of you helping in reporting bugs, using it or anything else.
 
 The software's MCreator forum page is [here](https://mcreator.net/forum/65454/mcr-plugin-creator).
 
