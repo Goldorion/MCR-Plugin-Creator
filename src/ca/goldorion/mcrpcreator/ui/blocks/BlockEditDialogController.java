@@ -270,6 +270,16 @@ public class BlockEditDialogController {
             } else if (blockModel.getBlockType().equals("Procedural Block")) {
                 ProceduralBlock.proceduralProcedureBlock(blockModel, file);
             }
+            File folderLang = new File(System.getProperty("user.dir") + "/plugins/" +
+                    BlockOverviewController.getPlugin() + "/lang/");
+            if(!folderLang.exists()){
+                folderLang.mkdirs();
+            }
+            File textsProperties = new File(System.getProperty("user.dir") + "/plugins/" +
+                    BlockOverviewController.getPlugin() + "/lang/texts.properties");
+            String line = "blockly.block." + fileNameField.getText() + "=" + textField.getText();
+            String text = FileUtils.loadContent(textsProperties) + line;
+            FileUtils.saveFile(textsProperties, text);
 
 
 

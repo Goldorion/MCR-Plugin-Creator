@@ -7,9 +7,13 @@ import java.util.List;
 
 public class FileUtils {
 
-    public static void createFile(File file) throws IOException{
+    public static void createFile(File file){
         if(!file.exists()){
-            file.createNewFile();
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                AlertUtils.error("Can not create the file", e.getMessage());
+            }
         }
     }
 
@@ -17,8 +21,9 @@ public class FileUtils {
         final FileWriter fw;
 
         try{
-
-            createFile(file);
+            if(!file.exists()) {
+                createFile(file);
+            }
             fw = new FileWriter(file);
             fw.write(text);
             fw.flush();

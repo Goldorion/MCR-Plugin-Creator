@@ -98,6 +98,19 @@ public class BlockOverviewController {
     private void handleDeleteBlock(){
         int selectedIndex = blockTable.getSelectionModel().getSelectedIndex();
         if(selectedIndex >= 0){
+            String blockElement = blockTable.getSelectionModel().getSelectedItem().getBlockElement();
+            if(blockElement.isEmpty()){
+                blockElement = "procedures";
+            }
+            String path = System.getProperty("user.dir") + "/plugins/" +
+                    BlockOverviewController.getPlugin() + "/" +
+                     blockElement + "/" + blockTable.getSelectionModel().getSelectedItem().getFileName() + ".json";
+
+            File file = new File(path);
+            System.out.println(path);
+
+            file.delete();
+
             blockTable.getItems().remove(selectedIndex);
         } else {
             AlertUtils.warning(mainApp, "No selection", "No Block Selected", "Please select a block in the table!");

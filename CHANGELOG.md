@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.5.1
+* [Bugfix] Plugins didn't work(Added the texts.properties file)
+* [Bugfix] AI task blocks were loaded as procedure blocks.
+* [Bugfix] Delete a block did not delete its file.
+
 ## 0.5.0
 * Updated to MCreator 2020.5.39514
 * Added the possibility to create code file (Java file only)

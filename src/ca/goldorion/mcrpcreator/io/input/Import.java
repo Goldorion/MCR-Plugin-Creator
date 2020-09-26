@@ -25,7 +25,7 @@ public class Import {
             BlockModel blockModel = new BlockModel(file.getName().replace(".json", ""));
             blockModel.setFileName(file.getName().replace(".json", ""));
             if(blockOutput.getOutput() != null){
-                BlockOutputImport.blockOutput(mainApp, blockModel, blockOutput, jsonElement);
+                BlockOutputImport.blockOutput(mainApp, blockModel, blockOutput, jsonElement, file);
             } else if(proceduralBlock.isPreviousStatement() == true) {
                 ProceduralBlockImport.proceduralBlock(mainApp, blockModel, proceduralBlock, jsonElement);
             } else{
@@ -49,7 +49,7 @@ public class Import {
             ProceduralBlock proceduralBlock = gson.fromJson(new BufferedReader(new FileReader(file)), ProceduralBlock.class);
             blockModel.setFileName(file.getName().replace(".json", ""));
             if(blockOutput.getOutput() != null){
-                blockModel = BlockOutputImport.blockOutputReturn(mainApp, blockModel, blockOutput, jsonElement);
+                blockModel = BlockOutputImport.blockOutputReturn(mainApp, blockModel, blockOutput, jsonElement, file);
             } else if(proceduralBlock.isPreviousStatement() == true) {
                 blockModel =  ProceduralBlockImport.proceduralBlockReturn(mainApp, blockModel, proceduralBlock, jsonElement);
             } else{

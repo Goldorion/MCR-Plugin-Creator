@@ -1,16 +1,24 @@
 package ca.goldorion.mcrpcreator.io.input;
 
 import ca.goldorion.mcrpcreator.MainApp;
+import ca.goldorion.mcrpcreator.io.jsons.BlockOutput;
 import ca.goldorion.mcrpcreator.models.BlockModel;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 
+import java.io.File;
+
 public class BlockOutputImport {
 
     public static void blockOutput(MainApp mainApp, BlockModel blockModel, ca.goldorion.mcrpcreator.io.jsons.BlockOutput blockOutput,
-                                   JsonElement jsonElement){
+                                   JsonElement jsonElement, java.io.File file){
         blockModel.setText(blockOutput.getMessage0());
         blockModel.setBlockType("Output Block");
+        if(file.getPath().contains("aitasks")){
+            blockModel.setBlockElement("aitasks");
+        }else if(file.getAbsolutePath().contains("procedures")){
+            blockModel.setBlockElement("procedures");
+        }
         blockModel.setInputsInline(blockOutput.isInputsInline());
         blockModel.setExtensions(blockOutput.getExtensions());
         blockModel.setType(blockOutput.getOutput());
@@ -60,10 +68,15 @@ public class BlockOutputImport {
 
     }
 
-    public static BlockModel blockOutputReturn(MainApp mainApp, BlockModel blockModel, ca.goldorion.mcrpcreator.io.jsons.BlockOutput blockOutput,
-                                               JsonElement jsonElement){
+    public static BlockModel blockOutputReturn(MainApp mainApp, BlockModel blockModel, BlockOutput blockOutput,
+                                               JsonElement jsonElement, File file){
         blockModel.setText(blockOutput.getMessage0());
         blockModel.setBlockType("Output Block");
+        if(file.getPath().contains("aitasks")){
+            blockModel.setBlockElement("aitasks");
+        }else if(file.getAbsolutePath().contains("procedures")){
+            blockModel.setBlockElement("procedures");
+        }
         blockModel.setInputsInline(blockOutput.isInputsInline());
         blockModel.setExtensions(blockOutput.getExtensions());
         blockModel.setType(blockOutput.getOutput());

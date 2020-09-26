@@ -24,8 +24,6 @@ public class Export {
         } else if(selectedBlock.getBlockType().equals("Procedural Block")){
             ProceduralBlock.proceduralProcedureBlock(selectedBlock, file);
         }
-
-
     }
 
     private static void proceduralProcedureBlock(MainApp mainApp, BlockModel selectedBlock) {
